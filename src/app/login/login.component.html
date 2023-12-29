@@ -1,120 +1,44 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container">
-    <a class="navbar-brand fs-4" href="#">Niềm tin Việt</a>
-    <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header border-bottom">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Niềm tin Việt</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 p-lg-0">
-        <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
-          <li class="nav-item mx-2">
-            <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
-          </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link" href="#">Bảng giá</a>
-          </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link" href="#">Liên hệ</a>
-          </li>
-        </ul>
-        <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
-          <a href="#" class="text-white text-decoration-none px-4 py-2 rounded-4" style="background-color: #BD1717;">Hotline 19008198</a>
-          <a [routerLink]="['/login']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #DFA31E;">Đăng Nhập</a>
-          <a [routerLink]="['/register']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #000000">Đăng ký</a>
+<div class="container-fluid">
+  <div class="row justify-content-center align-items-center vh-100">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body p-5">
+          <h5 class="card-title text-center mb-4" *ngIf="!register">Đăng nhập</h5>
+          <h5 class="card-title text-center mb-4" *ngIf="register">Đăng ký</h5>
+          <form [formGroup]="formGroup">
+            <div class="mb-3">
+              <label for="email" class="form-label">Số điện thoại</label>
+              <input type="text" class="form-control" id="email" placeholder="Nhập số điện thoại" formControlName="phoneNumber">
+              <div *ngIf="formGroup.get('phoneNumber').invalid && (formGroup.get('phoneNumber').dirty || formGroup.get('phoneNumber').touched)">
+                <div *ngIf="formGroup.get('phoneNumber').hasError('required')" class="error-message">Số điện thoại bắt buộc</div>
+                <div *ngIf="formGroup.get('phoneNumber').errors?.pattern" class="error-message">Số điện thoại không đúng định dạng</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label" *ngIf="resetPassword">Mật khẩu mới</label>
+              <label for="password" class="form-label" *ngIf="!resetPassword">Mật khẩu</label>
+              <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu" formControlName="secret">
+              <div *ngIf="formGroup.get('secret').invalid && (formGroup.get('secret').dirty || formGroup.get('secret').touched)">
+                <div *ngIf="formGroup.get('secret').hasError('required')" class="error-message">Mật khẩu bắt buộc</div>
+                <div *ngIf="formGroup.get('secret').hasError('minlength')" class="error-message">Mật khẩu phải có ít nhất 6 kí tự</div>
+              </div>
+            </div>
+            <label for="password" class="form-label" *ngIf="register || resetPassword">Mã OTP</label>
+            <div class="input-group mb-3" *ngIf="register || resetPassword">
+              <input type="text" class="form-control" placeholder="OTP" aria-label="OTP" aria-describedby="basic-addon2" formControlName="otp">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" style="margin-left: 5px" type="button" (click)="getOtp()">Lấy OTP</button>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary d-block w-100" [disabled]="formGroup.invalid" *ngIf="!register && !resetPassword" (click)="login()">Đăng nhập</button>
+            <button type="submit" class="btn btn-primary d-block w-100" [disabled]="formGroup.invalid" *ngIf="register" (click)="registerAcount()">Đăng ký</button>
+            <button type="submit" class="btn btn-primary d-block w-100" [disabled]="formGroup.invalid" *ngIf="resetPassword" (click)="forgotPassword()">Đổi mật khẩu</button>
+          </form>
+          <hr>
+          <p class="text-center mt-3">Quên mật khẩu <a (click)="changeForgotPassword()" style="color: #4ca2cd">Quên mật khẩu</a></p>
+          <p class="text-center mt-3">Bạn chưa có tài khoản? <a (click)="changeRegister()" style="color: #4ca2cd">Đăng ký</a></p>
         </div>
       </div>
     </div>
   </div>
-</nav>
-<section style="height: 600px">
-  <div class="contain">
-    <div class="row d-flex align-items-center justify-content-center mt-5">
-      <form class="col-md-6">
-        <div class="card px-5 py-5 mt-5">
-          <div class="form-input">
-            <input type="text" name="phoneNumber" placeholder="Phone Number" class="form-control"
-                   placeholder="Nhập số điện thoại" min="10" max="15">
-          </div>
-          <button class="btn btn-success mt-4 signup">Get OTP</button>
-          <div id="sign-in-button"></div>
-        </div>
-      </form>
-    </div>
-  <div>
-  </div>
-  </div>
-</section>
-<footer class="footer-custom pt-5 pd-4">
-  <div class="container text-md-left">
-    <div class="row text-md-left">
-      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
-        <p class="text-uppercase mb-4 font-weight-bold">Chúng tôi</p>
-        <div class="is-divider"></div>
-        <h5>
-          <a href="" class="text-white text-uppercase mb-4 font-weight-bold" style="text-decoration: none;">Niềm tin Việt</a>
-        </h5>
-        <p>
-          <i class="fas fa-phone"></i>19008198
-        </p>
-        <p>
-          <i class="fas fa-envelope mr-3"></i> support@gmail.com
-        </p>
-        <p>
-          <i class="fas fa-home mr-3"></i> Tổ 1, phường dịch vọng, quận cầu giấy, Hà Nội
-        </p>
-      </div>
-      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
-        <p class="text-uppercase mb-4 font-weight-bold">Bảng giá</p>
-        <div class="is-divider"></div>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 1</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 2</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 3</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 4</a>
-        </p>
-      </div>
-      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
-        <p class="text-uppercase mb-4 font-weight-bold">chính sách</p>
-        <div class="is-divider"></div>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Chính sách 1</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Chính sách 2</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Chính sách 3</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Chính sách 4</a>
-        </p>
-      </div>
-      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
-        <p class="text-uppercase mb-4 font-weight-bold">liên hệ</p>
-        <div class="is-divider"></div>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
-        </p>
-      </div>
-    </div>
-  </div>
-</footer>
+</div>

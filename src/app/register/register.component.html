@@ -23,16 +23,29 @@
         </ul>
         <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
           <a href="#" class="text-white text-decoration-none px-4 py-2 rounded-4" style="background-color: #BD1717;">Hotline 19008198</a>
-          <a [routerLink]="['/login']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #DFA31E;">Đăng Nhập</a>
-          <a [routerLink]="['/register']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #000000">Đăng ký</a>
+          <a [routerLink]="['/login']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #DFA31E;" *ngIf="!user">Đặt dịch vụ ngay</a>
+          <a [routerLink]="['/register']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #000000" *ngIf="!user">Trở thành tài xế</a>
         </div>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu" *ngIf="user">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="profile-pic">
+                <img src="https://source.unsplash.com/250x250?girl" alt="Profile Picture">
+              </div>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" [routerLink]="['/profile']"><i class="fas fa-sliders-h fa-fw"></i> Thông tin tài khoản</a></li>
+              <li><button class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</button></li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </nav>
 <section>
   <div class="container">
-    <form action="" class="p-4">
+    <form [formGroup]="formGroup" class="p-4">
       <h4 class="mb-5 text-secondary text-center">Đăng ký tài xế</h4>
       <div class="row">
         <label class="mb-2 circle">

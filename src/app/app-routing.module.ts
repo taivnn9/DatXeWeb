@@ -14,7 +14,12 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'otp', component: OtpComponent}
+  { path: 'otp', component: OtpComponent},
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
