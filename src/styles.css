@@ -1,0 +1,287 @@
+@media (max-width: 991px){
+  .sidebar {
+    backdrop-filter: blur(10px);
+  }
+}
+.search {
+  height: 400px;
+  background-color: #DFA31E;
+  text-align: center;
+}
+.footer-custom {
+  background-color: #000000;
+  color: #f1f1f1;
+  padding: 30px 0 0;
+}
+.widget-title {
+  text-transform: none;
+  font:1em;
+  font-weight: 600;
+  letter-spacing: .05em;
+  line-height: 1.05;
+}
+.is-divider {
+  border: 2px solid #FFFFFF;
+  width: 4em;
+  margin-bottom: 16px;
+}
+.advise {
+  background-color: #000000;
+}
+.section-customer-review {
+  background-color: #DFA31E;
+  display: grid;
+  place-items: center;
+  /* height: 100vh; */
+}
+
+.testimonial-section{
+  background-color: #f1f1f1;
+  padding: 80px 0;
+}
+.testi-img .img-box{
+  max-width: 360px;
+  margin:auto;
+  text-align: center;
+  position: relative;
+}
+.testi-img .circle{
+  height: 360px;
+  width: 360px;
+  background-color: #fb9c9a;
+  position: absolute;
+  border-radius: 50%;
+  left: 0;
+  bottom: 0;
+  transition: all 0.5s ease;
+}
+.testi-img .img-box-inner{
+  position: relative;
+  border-radius: 0 0 180px 180px;
+  overflow:hidden;
+}
+.testi-img .img-box-inner img{
+  max-width: 310px;
+}
+.testimonial-section .carousel-inner{
+  margin-bottom: 20px;
+}
+.testimonial-section .carousel-control-prev{
+  margin-right: 10px;
+}
+.testimonial-section .carousel-control-next,
+.testimonial-section .carousel-control-prev{
+  position: relative;
+  height: 35px;
+  width: 35px;
+  background-color: #fb9c9a;
+  display: inline-flex;
+  border-radius: 50%;
+}
+.testimonial-section .carousel-control-prev img,
+.testimonial-section .carousel-control-next img{
+  width: 15px;
+}
+.testi-item h3,
+.testi-item p{
+  font-size: 18px;
+}
+.testi-item h3{
+  text-transform: capitalize;
+}
+
+/* Responsive */
+@media(max-width:991px){
+  .testi-img .img-box{
+    max-width: 300px;
+  }
+  .testi-img .circle{
+    height: 300px;
+    width: 300px;
+  }
+  .testi-img .img-box-inner{
+    border-radius: 0 0 150px 150px;
+  }
+  .testi-img .img-box-inner img{
+    max-width: 230px;
+  }
+}
+@media(max-width:767px){
+  .testi-img{
+    margin-bottom: 25px;
+  }
+}
+.registration-form {
+  background-color: #000000;
+}
+
+.registration-image {
+  background-image: url('assets/images/register.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.registration-form form {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+}
+.registration-form form form-control{
+  border-radius: 65px;
+}
+.button-register {
+  background-color:  #f7ba25;
+}
+.btn-search {
+  margin-left: 10px;
+  background-color: #DFA31E;
+}
+@media (min-width: 992px) {
+  .search-form .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+  }
+  .btn-search {
+    margin-left: 10px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .search-form .form-control {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  .btn-search {
+    width: 100%;
+  }
+}
+.centered-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-image {
+  object-fit: cover;
+}
+.circle-label {
+  display: flex;
+  align-items: center;
+}
+
+.circle {
+  display: flex;
+  align-items: center;
+}
+
+.circle-text {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+.text {
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.rt-container {
+  background: #67B26F;
+  background: -webkit-linear-gradient(to right, #4ca2cd, #67B26F);
+  background: linear-gradient(to right, #4ca2cd, #67B26F);
+  padding: 0;
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  color: #000;
+}
+.student-profile .card {
+  border-radius: 10px;
+}
+
+.student-profile .card .card-header .profile_img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin: 10px auto;
+  border: 10px solid #ccc;
+  border-radius: 50%;
+}
+
+.student-profile .card h3 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.student-profile .card p {
+  font-size: 16px;
+  color: #000;
+}
+
+.student-profile .table th,
+.student-profile .table td {
+  font-size: 14px;
+  padding: 5px 10px;
+  color: #000;
+}
+.profile-pic{
+  display: inline-block;
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.profile-pic img{
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.profile-menu .dropdown-menu {
+  right: 0;
+  left: unset;
+}
+.profile-menu .fa-fw {
+  margin-right: 10px;
+}
+
+.toggle-change::after {
+  border-top: 0;
+  border-bottom: 0.3em solid;
+}
+.otp-field {
+  flex-direction: row;
+  column-gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.otp-field input {
+  height: 45px;
+  width: 42px;
+  border-radius: 6px;
+  outline: none;
+  font-size: 1.125rem;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+.otp-field input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+.otp-field input::-webkit-inner-spin-button,
+.otp-field input::-webkit-outer-spin-button {
+  display: none;
+}
+
+.resend {
+  font-size: 12px;
+}
+

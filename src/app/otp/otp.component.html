@@ -1,0 +1,131 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container">
+    <a class="navbar-brand fs-4" href="#">Niềm tin Việt</a>
+    <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Niềm tin Việt</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 p-lg-0">
+        <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
+          <li class="nav-item mx-2">
+            <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="#">Bảng giá</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="#">Liên hệ</a>
+          </li>
+        </ul>
+        <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
+          <a href="#" class="text-white text-decoration-none px-4 py-2 rounded-4" style="background-color: #BD1717;">Hotline 19008198</a>
+          <a [routerLink]="['/login']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #DFA31E;">Đăng Nhập</a>
+          <a [routerLink]="['/register']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #000000">Đăng ký</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<section class="bg-body-tertiary" style="height: 600px">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6 col-lg-4" style="min-width: 500px;">
+      <div class="card bg-white mb-5 mt-5 border-0" style="box-shadow: 0 12px 15px rgba(0, 0, 0, 0.02);">
+        <div class="card-body p-5 text-center">
+          <h4>Verify</h4>
+          <p>Your code was sent to you via email</p>
+
+          <div class="otp-field mb-4">
+            <input type="number" />
+            <input type="number" disabled />
+            <input type="number" disabled />
+            <input type="number" disabled />
+            <input type="number" disabled />
+            <input type="number" disabled />
+          </div>
+
+          <button class="btn btn-primary mb-3">
+            Verify
+          </button>
+
+          <p class="resend text-muted mb-0">
+            Didn't receive code? <a href="">Request again</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="footer-custom pt-5 pd-4">
+  <div class="container text-md-left">
+    <div class="row text-md-left">
+      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
+        <p class="text-uppercase mb-4 font-weight-bold">Chúng tôi</p>
+        <div class="is-divider"></div>
+        <h5>
+          <a href="" class="text-white text-uppercase mb-4 font-weight-bold" style="text-decoration: none;">Niềm tin Việt</a>
+        </h5>
+        <p>
+          <i class="fas fa-phone"></i>19008198
+        </p>
+        <p>
+          <i class="fas fa-envelope mr-3"></i> support@gmail.com
+        </p>
+        <p>
+          <i class="fas fa-home mr-3"></i> Tổ 1, phường dịch vọng, quận cầu giấy, Hà Nội
+        </p>
+      </div>
+      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
+        <p class="text-uppercase mb-4 font-weight-bold">Bảng giá</p>
+        <div class="is-divider"></div>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 1</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 2</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 3</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 4</a>
+        </p>
+      </div>
+      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
+        <p class="text-uppercase mb-4 font-weight-bold">chính sách</p>
+        <div class="is-divider"></div>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Chính sách 1</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Chính sách 2</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Chính sách 3</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Chính sách 4</a>
+        </p>
+      </div>
+      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
+        <p class="text-uppercase mb-4 font-weight-bold">liên hệ</p>
+        <div class="is-divider"></div>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

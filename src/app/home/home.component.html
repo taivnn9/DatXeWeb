@@ -1,0 +1,212 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container">
+    <a class="navbar-brand fs-4" href="#">Niềm tin Việt</a>
+    <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Niềm tin Việt</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 p-lg-0">
+        <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
+          <li class="nav-item mx-2">
+            <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="#">Bảng giá</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="#">Liên hệ</a>
+          </li>
+        </ul>
+        <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
+          <a href="#" class="text-white text-decoration-none px-4 py-2 rounded-4" style="background-color: #BD1717;">Hotline 19008198</a>
+          <a [routerLink]="['/login']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #DFA31E;">Đăng Nhập</a>
+          <a [routerLink]="['/register']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #000000">Đăng ký</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<section>
+  <div class="container">
+    <div class="row text-center p-2">
+      <h2>Bảng giá thuê thiết bị</h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-2 col-md-4 mb-3">
+        <h5>Bình oxy 2.5L</h5>
+      </div>
+      <div class="col-lg-2 col-md-4 mb-3">
+        <h5>Bình oxy 5L</h5>
+      </div>
+      <div class="col-lg-2 col-md-4 mb-3">
+        <h5>Bình oxy 10L</h5>
+      </div>
+      <div class="col-lg-2 col-md-4 mb-3">
+        <h5>Bình oxy 2.5L</h5>
+      </div>
+      <div class="col-lg-2 col-md-4 mb-3">
+        <h5>Bình oxy 2.5L</h5>
+      </div>
+    </div>
+    <div class="row">
+      <img src="assets/images/oxy.png">
+    </div>
+    <div class="row text-center p-5">
+      <div class="col-md-12 col-lg-4">
+        <h5>Thuê theo ngày</h5>
+          <label class="text-white text-decoration-none px-4 py-2 rounded-4" style="background-color: #DFA31E;">1.000.000đ</label>
+      </div>
+      <div class="col-md-12 col-lg-4">
+        <h5>Thuê theo tuần</h5>
+          <label href="#" class="text-white text-decoration-none px-4 py-2 rounded-4" style="background-color: #DFA31E;">2.000.000đ</label>
+      </div>
+      <div class="col-md-12 col-lg-4">
+        <h5>Thuê theo thángy</h5>
+          <label href="#" class="text-white text-decoration-none px-4 py-2 rounded-4" style="background-color: #DFA31E;">5.000.000đ</label>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container-fluid p-0">
+    <div class="row g-0">
+      <!-- Cột bên trái - Form -->
+      <div class="col-lg-6 registration-form">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <!-- Form đăng ký -->
+          <form>
+            <h2 class="mb-4" style="color: #ffffff; text-align: center;">Đăng ký tư vấn</h2>
+            <div class="mb-3">
+              <input type="text" class="form-control rounded-4" id="username" placeholder="Họ tên">
+            </div>
+            <div class="mb-3">
+              <input type="text" class="form-control rounded-4" id="email" placeholder="Số điện thoại">
+            </div>
+            <div class="mb-3">
+              <input type="email" class="form-control rounded-4" id="email" placeholder="Email">
+            </div>
+            <div class="mb-3">
+              <textarea type="password" rows="3" class="form-control rounded-4" id="confirmPassword" placeholder="Ghi chú"></textarea>
+            </div>
+            <button type="submit" class="btn rounded-4 w-100 button-register">Đăng ký ngay</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-6 registration-image"></div>
+    </div>
+  </div>
+</section>
+<section class="testimonial-section d-flex align-items-center">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6 testi-img">
+        <div class="img-box">
+          <div class="circle"></div>
+          <div class="img-box-inner">
+            <img src="assets/images/1.png" alt="testi img">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div id="myCarousel" class="carousel slide" data-bs-interval="5000" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item testi-item active" data-color="#fb9c9a" data-img="img/testimonial/1.png">
+              <p><i class="fa fa-quote-left"></i>Đội ngũ Y, Bác sĩ chuyên nghiệp, trình độ cao và giàu kinh nghiệm. Sẽ luôn bên cạnh người bệnh để theo dõi, hỗ trợ y tế, chăm sóc trên đường vận chuyển</p>
+              <h3>Trung <span>Hiếu</span></h3>
+            </div>
+            <div class="carousel-item testi-item" data-color="#fbd39a" data-img="img/testimonial/2.png">
+              <p>Đội ngũ Y, Bác sĩ chuyên nghiệp, trình độ cao và giàu kinh nghiệm. Sẽ luôn bên cạnh người bệnh để theo dõi, hỗ trợ y tế, chăm sóc trên đường vận chuyển</p>
+              <h3>Tuấn <span>Hùng</span></h3>
+            </div>
+            <div class="carousel-item testi-item" data-color="#9ab0fb" data-img="img/testimonial/3.png">
+              <p>Đội ngũ Y, Bác sĩ chuyên nghiệp, trình độ cao và giàu kinh nghiệm. Sẽ luôn bên cạnh người bệnh để theo dõi, hỗ trợ y tế, chăm sóc trên đường vận chuyển</p>
+              <h3>Hằng <span>Phạm</span></h3>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <img src="assets/images/left-arrow.png" alt="prev">
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <img src="assets/images/right-arrow.png" alt="prev">
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="footer-custom pt-5 pd-4">
+  <div class="container text-md-left">
+    <div class="row text-md-left">
+      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
+        <p class="text-uppercase mb-4 font-weight-bold">Chúng tôi</p>
+        <div class="is-divider"></div>
+        <h5>
+          <a href="" class="text-white text-uppercase mb-4 font-weight-bold" style="text-decoration: none;">Niềm tin Việt</a>
+        </h5>
+        <p>
+          <i class="fas fa-phone"></i>19008198
+        </p>
+        <p>
+          <i class="fas fa-envelope mr-3"></i> support@gmail.com
+        </p>
+        <p>
+          <i class="fas fa-home mr-3"></i> Tổ 1, phường dịch vọng, quận cầu giấy, Hà Nội
+        </p>
+      </div>
+      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
+        <p class="text-uppercase mb-4 font-weight-bold">Bảng giá</p>
+        <div class="is-divider"></div>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 1</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 2</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 3</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 4</a>
+        </p>
+      </div>
+      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
+        <p class="text-uppercase mb-4 font-weight-bold">chính sách</p>
+        <div class="is-divider"></div>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Chính sách 1</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Chính sách 2</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Chính sách 3</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Chính sách 4</a>
+        </p>
+      </div>
+      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
+        <p class="text-uppercase mb-4 font-weight-bold">liên hệ</p>
+        <div class="is-divider"></div>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
+        </p>
+        <p>
+          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
