@@ -18,6 +18,9 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (!this.user){
+      this.router.navigate(['/login']);
+    }
   }
   logout() {
     this.authService.logout().subscribe(

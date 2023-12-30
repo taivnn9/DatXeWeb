@@ -26,9 +26,8 @@ export class AuthService {
     const token: any = localStorage.getItem("currentUser");
     console.log(token);
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + token, // Ví dụ: Thêm header Authorization
-      'Content-Type': 'application/json' // Header Content-Type
-      // Thêm các header khác nếu cần
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json'
     });
 
     const options = {

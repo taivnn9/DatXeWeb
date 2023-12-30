@@ -166,6 +166,7 @@
 
 .custom-image {
   object-fit: cover;
+  width: 300px;
 }
 .circle-label {
   display: flex;
@@ -284,4 +285,23 @@
 .resend {
   font-size: 12px;
 }
+input[type="file"] {
+  display: none;
+}
 
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.custom-file-upload span {
+  pointer-events: none;
+}
+
+.custom-file-upload:hover {
+  background-color: #2980b9;
+}
