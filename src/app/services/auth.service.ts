@@ -60,4 +60,8 @@ export class AuthService {
       }));
   }
 
+  public get currentAccountValue(): any {
+    return localStorage.getItem("currentUser");
+  }
+
 }

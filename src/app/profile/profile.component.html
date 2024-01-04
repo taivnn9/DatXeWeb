@@ -54,7 +54,7 @@
                 <div class="card shadow-sm">
                   <div class="card-header bg-transparent text-center">
                     <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
-                    <h3>Nguyễn Văn A</h3>
+                    <h3>{{profile.name}}</h3>
                   </div>
                   <div class="card-body text-center text-end">
                     <p class="mb-0 text-center text-end"><i class="fa-solid fa-user"></i><a class="text-decoration-none text-dark" href="#">Thông tin tài khoản</a></p>
@@ -75,15 +75,7 @@
                           Họ và tên
                         </td>
                         <td>
-                          Nguyễn Văn A
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Tuổi
-                        </td>
-                        <td>
-                          28 tuổi
+                          {{profile.name}}
                         </td>
                       </tr>
                       <tr>
@@ -91,7 +83,7 @@
                           Giới tính
                         </td>
                         <td>
-                          Nam
+                          {{profile.sex == 0 ? 'Nam' : 'Nữ'}}
                         </td>
                       </tr>
                       <tr>
@@ -99,7 +91,15 @@
                           Ngày sinh
                         </td>
                         <td>
-                          12/03/1995
+                          {{profile.dob}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Địa chỉ
+                        </td>
+                        <td>
+                          {{profile.address}}
                         </td>
                       </tr>
                       </tbody>
@@ -112,7 +112,18 @@
                     <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Thông tin khác</h3>
                   </div>
                   <div class="card-body pt-0">
-                    <p>Sở thích vv.....</p>
+                    <div class="col-md-12">
+                      <div>Ảnh chân dung</div>
+                      <div class="centered-content">
+                        <img [src]="" alt="Selected Image" class="custom-image">
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div>Ảnh CCCD/CMT</div>
+                      <div class="centered-content">
+                        <img [src]="" alt="Selected Image" class="custom-image">
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

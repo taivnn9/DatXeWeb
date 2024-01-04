@@ -13,6 +13,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { OtpComponent } from './otp/otp.component';
+import { DriverBookingComponent } from './driver-booking/driver-booking.component';
+import { Interceptor } from './interceptor';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { OtpComponent } from './otp/otp.component';
     ProfileComponent,
     RegisterComponent,
     LoginComponent,
-    OtpComponent
+    OtpComponent,
+    DriverBookingComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,9 @@ import { OtpComponent } from './otp/otp.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

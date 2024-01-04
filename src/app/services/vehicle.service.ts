@@ -8,48 +8,28 @@ export class VehicleService {
   constructor(private http: HttpClient) { }
 
   vehicle(vehicle: any) {
-    const token: any = localStorage.getItem("currentUser");
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + token,
-    });
-
-    const options = {
-      headers: headers
-    };
-    return this.http.post<any>(`${environment.apiUrl}/vehicle`, vehicle, options)
+    return this.http.post<any>(`${environment.apiUrl}/vehicle`, vehicle)
       .pipe(map(res => {
         return res;
       }));
   }
 
   becomeDriver(vehicle: any) {
-    const token: any = localStorage.getItem("currentUser");
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + token,
-    });
-
-    const options = {
-      headers: headers
-    };
-    return this.http.post<any>(`${environment.apiUrl}/become-driver`, vehicle, options)
+    return this.http.post<any>(`${environment.apiUrl}/become-driver`, vehicle)
       .pipe(map(res => {
         return res;
       }));
   }
 
   uploadFile(formData: any) {
-    const token: any = localStorage.getItem("currentUser");
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + token,
-    });
-
-    const options = {
-      headers: headers
-    };
-    return this.http.post<any>(`${environment.apiUrl}/image`, formData, options).pipe(
+    return this.http.post<any>(`${environment.apiUrl}/image`, formData).pipe(
       map(res => {
         return res;
       })
     );
+  }
+
+  driverProfile() {
+    return this.http.get(`${environment.apiUrl}/driver-profile`);
   }
 }

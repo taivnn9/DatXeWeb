@@ -1,0 +1,14 @@
+
+  /* Thêm CSS tùy chỉnh nếu cần */
+.left-list {
+  height: calc(100vh - 56px); /* Điều chỉnh chiều cao để phù hợp với thanh navbar */
+  overflow-y: auto;
+}
+.custom-btn-reload {
+  display: flex;
+  align-items: center;
+}
+.badge {
+  font-size: 12px;
+  padding: 4px 8px;
+}

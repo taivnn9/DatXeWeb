@@ -43,10 +43,11 @@ export class LoginComponent implements OnInit {
         (response) => {
           if(response.status == 200) {
             this.register = false;
+            this.toastr.success('Thành công', 'Đăng ký');
           }
         },
           (error) => {
-            this.toastr.error('Có lỗi xảy ra khi tải dữ liệu', 'Lỗi');
+            this.toastr.error('Đăng ký thất bại', 'Đăng ký');
         })
     }
   }
@@ -65,7 +66,7 @@ export class LoginComponent implements OnInit {
           }
         },
         (error) => {
-          this.toastr.error('Có lỗi xảy ra khi tải dữ liệu', 'Lỗi');
+          this.toastr.error('Tài khoản hoặc mật khẩu không chính xác', 'Đăng nhập');
         }
       );
     }
@@ -81,6 +82,9 @@ export class LoginComponent implements OnInit {
       const response: any = res;
       if (response.status == 200) {
         this.formGroup.get("otp").setValue(response.detail.content);
+        this.toastr.success('Thành công', 'Lấy OTP');
+      }else {
+        this.toastr.error('Thất bại', 'Lấy OTP');
       }
     })
   }
@@ -112,6 +116,9 @@ export class LoginComponent implements OnInit {
       const response: any = res;
       if (response.status == 200) {
         this.resetPassword = false;
+        this.toastr.success('Thành công', 'Đổi mật khẩu');
+      }else {
+        this.toastr.error('Thất bại', 'Đổi mật khẩu');
       }
     })
   }
