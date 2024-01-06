@@ -4,6 +4,7 @@ import { Booking, BookingType, BookingStatus, Address, Vehicle, Equipment, Medic
 import { ToastrService } from 'ngx-toastr';
 //import { environment } from '@environments/environment';
 import { BookingService } from '../services/booking.service';
+import { environment } from '../../environments/environment.prod';
 
 @Component({
   selector: 'app-otp',
@@ -16,17 +17,25 @@ export class OtpComponent implements OnInit {
 
   vehicles: Vehicle[];
   equipments: Equipment[];
-  medic: Medic[]
+  medics: Medic[]
 
   diaGioiHanhChinhVN: any
 
-  selectedCityFrom: any
-  selectedDistrictFrom: any
-  selectedWardFrom: any
+  selectedCityFrom: any = null
+  selectedDistrictFrom: any = null
+  selectedWardFrom:  any = null
 
-  selectedCityTo: any
-  selectedDistrictTo: any
-  selectedWardTo: any
+  selectedCityTo: any = null
+  selectedDistrictTo: any = null
+  selectedWardTo: any = null
+
+
+
+
+  displayPopupValue: string = 'none'
+  displayPopupTile: string = 'none'
+  displayValue: any
+
 
   constructor(
     private bookingService: BookingService,
@@ -38,7 +47,24 @@ export class OtpComponent implements OnInit {
     this.getAllMedicAvailable()
     this.DiaGioiHanhChinhVN()
   }
-
+  onOpenPopup(type: string, selectedValue: any) {
+    this.displayPopupValue = 'block'
+    if (type == 'vehicle') {
+      this.displayValue = selectedValue.vehicleImages
+      this.displayPopupTile = 'phương tiện'
+    } else {
+      this.displayValue = selectedValue.equipmentImages
+      this.displayPopupTile = 'trang thiết bị'
+    }
+    
+  }
+  onClosePopup() {
+      this.displayPopupValue = 'none'
+  }
+  
+  GetImageUrl(imageId: string) {
+    return `${environment.apiUrl}/image/${imageId}`
+  }
   DiaGioiHanhChinhVN() {
     this.bookingService.DiaGioiHanhChinhVN().toPromise().then(
       (response) => {
@@ -84,7 +110,7 @@ export class OtpComponent implements OnInit {
   getAllMedicAvailable() {
     this.bookingService.getAllMedicAvailable().toPromise().then(
       (response: ResponseBody) => {
-        this.medic = response.detail;
+        this.medics = response.detail;
         //this.historyBookings.sort((a, b) => a.status - b.status);
         //this.listBookingInTrip = this.historyBookings.filter(obj => obj.status == BookingStatus.ProviderConfirmation || obj.status == BookingStatus.ProviderOnWay || obj.status == BookingStatus.ProviderAreServing);
       },
@@ -125,9 +151,6 @@ export class OtpComponent implements OnInit {
   GetStatusText(value: number) {
     return BookingStatus[value];
   }
-  GetImageUrl(imageId: string) {
-    //return `${environment.apiUrl_Prod}/image/${imageId}`
-  }
 
   GetItemsFromMap(mapName) {
 
@@ -157,6 +180,8 @@ export class OtpComponent implements OnInit {
 
   SubmitBooking() {
     console.log(this.currentBooking)
+
+    
   }
 
 
