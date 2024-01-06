@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { ToastrService} from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,10 +10,11 @@ import { ToastrService} from 'ngx-toastr';
   providers: [AuthService]
 })
 export class HomeComponent implements OnInit {
-  user : any = localStorage.getItem("currentUser");
+  user: any = localStorage.getItem("currentUser");
   constructor(
-  private authService: AuthService,
-  private toastr: ToastrService
+    private authService: AuthService,
+    private toastr: ToastrService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -22,11 +24,15 @@ export class HomeComponent implements OnInit {
       (response) => {
         localStorage.removeItem('currentUser');
         this.user = null;
+        this.router.navigate(['/'])
       },
       (error) => {
         this.toastr.error('Có lỗi xảy ra khi tải dữ liệu', 'Lỗi');
       }
     );
+  }
+  login() {
+    this.router.navigate(['/login'])
   }
 
 }

@@ -1,53 +1,7 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container">
-    <a class="navbar-brand fs-4" href="#">Niềm tin Việt</a>
-    <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header border-bottom">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Niềm tin Việt</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 p-lg-0">
-        <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
-          <li class="nav-item mx-2">
-            <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
-          </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link" href="#">Bảng giá</a>
-          </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link" href="#">Liên hệ</a>
-          </li>
-        </ul>
-        <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
-          <a href="#" class="text-white text-decoration-none px-4 py-2 rounded-4" style="background-color: #BD1717;">Hotline 19008198</a>
-          <a [routerLink]="['/login']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #DFA31E;" *ngIf="!user">Đặt dịch vụ ngay</a>
-          <a [routerLink]="['/register']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #000000">Trở thành tài xế</a>
-        </div>
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu" *ngIf="user">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <div class="profile-pic">
-                <img src="https://source.unsplash.com/250x250?girl" alt="Profile Picture">
-              </div>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" [routerLink]="['/profile']"><i class="fas fa-sliders-h fa-fw"></i> Thông tin tài khoản</a></li>
-              <li><a class="dropdown-item" [routerLink]="['/driver-booking']"><i class="fas fa-sliders-h fa-fw"></i>Quản lý chuyến xe</a></li>
-              <li><button class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</button></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</nav>
 <div class="container mt-5 mb-5">
   <div class="row">
     <div class="col-md-4 left-column d-flex flex-column">
-      <div>
+      <!--<div>
         <div class="custom-btn-reload">
           <h5>Danh sách nhận chuyến</h5>
           <button class="btn" (click)="loadAllBookingAvailable()">
@@ -60,7 +14,7 @@
             <span class="badge bg-info rounded-pill position-absolute top-0 end-0"  *ngIf="booking.status == 1">Chưa nhận</span>
           </li>
         </ul>
-      </div>
+      </div>-->
       <div class="mt-3">
         <div class="custom-btn-reload">
           <h5>Lịch sử nhận chuyến</h5>
@@ -185,75 +139,3 @@
       </div>
     </div>
   </div>
-
-<footer class="footer-custom pt-5 pd-4">
-  <div class="container text-md-left">
-    <div class="row text-md-left">
-      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
-        <p class="text-uppercase mb-4 font-weight-bold">Chúng tôi</p>
-        <div class="is-divider"></div>
-        <h5>
-          <a href="" class="text-white text-uppercase mb-4 font-weight-bold" style="text-decoration: none;">Niềm tin Việt</a>
-        </h5>
-        <p>
-          <i class="fas fa-phone"></i>19008198
-        </p>
-        <p>
-          <i class="fas fa-envelope mr-3"></i> support@gmail.com
-        </p>
-        <p>
-          <i class="fas fa-home mr-3"></i> Tổ 1, phường dịch vọng, quận cầu giấy, Hà Nội
-        </p>
-      </div>
-      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
-        <p class="text-uppercase mb-4 font-weight-bold">Bảng giá</p>
-        <div class="is-divider"></div>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 1</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 2</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 3</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 4</a>
-        </p>
-      </div>
-      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
-        <p class="text-uppercase mb-4 font-weight-bold">chính sách</p>
-        <div class="is-divider"></div>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Chính sách 1</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Chính sách 2</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Chính sách 3</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Chính sách 4</a>
-        </p>
-      </div>
-      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
-        <p class="text-uppercase mb-4 font-weight-bold">liên hệ</p>
-        <div class="is-divider"></div>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
-        </p>
-      </div>
-    </div>
-  </div>
-</footer>
-

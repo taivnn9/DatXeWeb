@@ -25,7 +25,7 @@ export class DriverBookingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadAllBookingAvailable();
+    //this.loadAllBookingAvailable();
     this.loadAllBookingHistory();
   }
 

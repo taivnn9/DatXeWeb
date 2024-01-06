@@ -1,76 +1,30 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container">
-    <a class="navbar-brand fs-4" href="#">Niềm tin Việt</a>
-    <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header border-bottom">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Niềm tin Việt</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 p-lg-0">
-        <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
-          <li class="nav-item mx-2">
-            <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
-          </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link" href="#">Bảng giá</a>
-          </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link" href="#">Liên hệ</a>
-          </li>
-        </ul>
-        <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
-          <a href="#" class="text-white text-decoration-none px-4 py-2 rounded-4" style="background-color: #BD1717;">Hotline 19008198</a>
-          <a [routerLink]="['/login']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #DFA31E;" *ngIf="!user">Đặt dịch vụ ngay</a>
-          <a [routerLink]="['/register']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #000000">Trở thành tài xế</a>
-        </div>
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu" *ngIf="user">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <div class="profile-pic">
-                <img src="https://source.unsplash.com/250x250?girl" alt="Profile Picture">
-              </div>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" [routerLink]="['/profile']"><i class="fas fa-sliders-h fa-fw"></i> Thông tin tài khoản</a></li>
-              <li><a class="dropdown-item" [routerLink]="['/driver-booking']"><i class="fas fa-sliders-h fa-fw"></i>Quản lý chuyến xe</a></li>
-              <li><button class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</button></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</nav>
-<section>
-  <div class="rt-container" style="height: 600px;">
-    <div class="col-rt-12">
-      <div class="Scriptcontent">
-        <div class="student-profile py-4">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-4">
-                <div class="card shadow-sm">
-                  <div class="card-header bg-transparent text-center">
-                    <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
-                    <h3>{{profile.name}}</h3>
-                  </div>
-                  <div class="card-body text-center text-end">
-                    <p class="mb-0 text-center text-end"><i class="fa-solid fa-user"></i><a class="text-decoration-none text-dark" href="#">Thông tin tài khoản</a></p>
-                    <p class="mb-0 text-center text-end"><i class="fa fa-sign-out" aria-hidden="true"></i><label class="text-decoration-none text-dark"(click)="logout()">Đăng xuất</label></p>
-                  </div>
+
+<div class="rt-container" style="height: 600px;">
+  <div class="col-rt-12">
+    <div class="Scriptcontent">
+      <div class="student-profile py-4">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card shadow-sm">
+                <div class="card-header bg-transparent text-center">
+                  <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
+                  <h3>{{profile.name}}</h3>
+                </div>
+                <div class="card-body text-center text-end">
+                  <p class="mb-0 text-center text-end"><i class="fa-solid fa-user"></i><a class="text-decoration-none text-dark" href="#">Thông tin tài khoản</a></p>
+                  <p class="mb-0 text-center text-end"><i class="fa fa-sign-out" aria-hidden="true"></i><label class="text-decoration-none text-dark" (click)="logout()">Đăng xuất</label></p>
                 </div>
               </div>
-              <div class="col-lg-8">
-                <div class="card shadow-sm">
-                  <div class="card-header bg-transparent border-0">
-                    <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Thông tin tài khoản</h3>
-                  </div>
-                  <div class="card-body pt-0">
-                    <table class="table">
-                      <tbody>
+            </div>
+            <div class="col-lg-8">
+              <div class="card shadow-sm">
+                <div class="card-header bg-transparent border-0">
+                  <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Thông tin tài khoản</h3>
+                </div>
+                <div class="card-body pt-0">
+                  <table class="table">
+                    <tbody>
                       <tr>
                         <td>
                           Họ và tên
@@ -103,27 +57,26 @@
                           {{profile.address}}
                         </td>
                       </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                    </tbody>
+                  </table>
                 </div>
-                <div style="height: 26px"></div>
-                <div class="card shadow-sm">
-                  <div class="card-header bg-transparent border-0">
-                    <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Thông tin khác</h3>
-                  </div>
-                  <div class="card-body pt-0">
-                    <div class="col-md-12">
-                      <div>Ảnh chân dung</div>
-                      <div class="centered-content">
-                        <img [src]="" alt="Selected Image" class="custom-image">
-                      </div>
+              </div>
+              <div style="height: 26px"></div>
+              <div class="card shadow-sm">
+                <div class="card-header bg-transparent border-0">
+                  <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Thông tin khác</h3>
+                </div>
+                <div class="card-body pt-0">
+                  <div class="col-md-12">
+                    <div>Ảnh chân dung</div>
+                    <div class="centered-content">
+                      <img [src]="" alt="Selected Image" class="custom-image">
                     </div>
-                    <div class="col-md-12">
-                      <div>Ảnh CCCD/CMT</div>
-                      <div class="centered-content">
-                        <img [src]="" alt="Selected Image" class="custom-image">
-                      </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div>Ảnh CCCD/CMT</div>
+                    <div class="centered-content">
+                      <img [src]="" alt="Selected Image" class="custom-image">
                     </div>
                   </div>
                 </div>
@@ -134,74 +87,4 @@
       </div>
     </div>
   </div>
-</section>
-<footer class="footer-custom pt-5 pd-4">
-  <div class="container text-md-left">
-    <div class="row text-md-left">
-      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
-        <p class="text-uppercase mb-4 font-weight-bold">Chúng tôi</p>
-        <div class="is-divider"></div>
-        <h5>
-          <a href="" class="text-white text-uppercase mb-4 font-weight-bold" style="text-decoration: none;">Niềm tin Việt</a>
-        </h5>
-        <p>
-          <i class="fas fa-phone"></i>19008198
-        </p>
-        <p>
-          <i class="fas fa-envelope mr-3"></i> support@gmail.com
-        </p>
-        <p>
-          <i class="fas fa-home mr-3"></i> Tổ 1, phường dịch vọng, quận cầu giấy, Hà Nội
-        </p>
-      </div>
-      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
-        <p class="text-uppercase mb-4 font-weight-bold">Bảng giá</p>
-        <div class="is-divider"></div>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 1</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 2</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 3</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Bảng giá 4</a>
-        </p>
-      </div>
-      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
-        <p class="text-uppercase mb-4 font-weight-bold">chính sách</p>
-        <div class="is-divider"></div>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Chính sách 1</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Chính sách 2</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Chính sách 3</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Chính sách 4</a>
-        </p>
-      </div>
-      <div class="col-md-12 col-lg-6 col-xl-3 mx-auto mt-3">
-        <p class="text-uppercase mb-4 font-weight-bold">liên hệ</p>
-        <div class="is-divider"></div>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
-        </p>
-        <p>
-          <a href="" class="text-white" style="text-decoration: none;">Title 1</a>
-        </p>
-      </div>
-    </div>
-  </div>
-</footer>
+</div>
