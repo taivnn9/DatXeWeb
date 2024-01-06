@@ -1,6 +1,52 @@
 <div class="card shadow-sm">
   <div class="card-header bg-transparent border-0">
-    <h3 class="mb-0">Lịch sử đặt dịch vụ</h3>
+    <h3 class="mb-0">Thông tin tài xế</h3>
+  </div>
+  <div class="card-body pt-0">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>
+            Họ và tên
+          </td>
+          <td>
+            {{driver.name}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Số điện thoại
+          </td>
+          <td>
+            {{driver.phoneNumber}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            CMND/CCCD
+          </td>
+          <td>
+            {{driver.nationalId}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Tình trạng phê duyệt
+          </td>
+          <td>
+            {{GetDriverStatusText(driver.status)}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div style="height: 26px"></div>
+
+<div class="card shadow-sm">
+  <div class="card-header bg-transparent border-0">
+    <h3 class="mb-0">Lịch sử cung cấp dịch vụ</h3>
   </div>
   <div class="card-body pt-0">
     <div class="col-md-12">
@@ -12,7 +58,7 @@
             <thead>
 
               <tr>
-                <th colspan="4">Thông tin đặt xe</th>
+                <th colspan="4">Thông tin chuyến đi</th>
               </tr>
             </thead>
             <tbody>
@@ -32,7 +78,9 @@
 
                 <td>{{booking.cost}}</td>
 
-                <td>{{GetStatusText(booking.status)}}</td>
+                <td>
+                  <span class="badge bg-success">{{GetStatusText(booking.status)}}</span>
+                </td>
                 <td>
                   <p class="p_link" (click)="onOpenPopup(booking)">Chi tiết</p>
                 </td>
@@ -54,7 +102,7 @@
 
 
 <!-- Modal Vehicle -->
-<div class="modal" [ngStyle]="{'display':displayPopupValue}">
+<div class="modal modal-xl" [ngStyle]="{'display':displayPopupValue}">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -94,9 +142,9 @@
             </ul>
 
             <div class="col-12 col-md-4 text-center">
-              <button class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600" *ngIf="booking.status == 2" (click)="providerOnWay(booking)">Đón khách</button>
-              <button class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600" *ngIf="booking.status == 3" (click)="providerAreServing(booking)">Phục vụ</button>
-              <button class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600" *ngIf="booking.status == 4" (click)="finished(booking)">Hoàn thành</button>
+              <button class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600" *ngIf="booking.status < 4" (click)="providerAction(booking)">{{btnActionText}}</button>
+              <!--<button class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600" *ngIf="booking.status == 3" (click)="providerAreServing(booking)">Phục vụ</button>
+              <button class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600" *ngIf="booking.status == 4" (click)="finished(booking)">Hoàn thành</button>-->
             </div>
           </div>
 

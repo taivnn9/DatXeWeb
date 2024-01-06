@@ -81,22 +81,10 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.user){
-      this.router.navigate(['/login']);
-    }
+    //if (!this.user){
+    //  this.router.navigate(['/login']);
+    //}
   }
-  logout() {
-    this.authService.logout().subscribe(
-      (response) => {
-        localStorage.removeItem('currentUser');
-        this.user = null;
-      },
-      (error) => {
-        this.toastr.error('Có lỗi xảy ra khi tải dữ liệu', 'Lỗi');
-      }
-    );
-  }
-
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0] as File;
     this.previewSelectedFile();
@@ -436,7 +424,11 @@ export class RegisterComponent implements OnInit {
         }
         this.vehicleService.becomeDriver(driver).subscribe(
           (res) => {
-            this.router.navigate(['/']);
+            const notice = 'Đăng ký làm tài xế của bạn đã được gửi, hệ thống sẽ phản hồi lại thông qua số điện thoại bạn đăng ký'
+            const userConfirmed = window.confirm(notice);
+            this.toastr.success(`Gửi đăng ký làm tài xế thành công`);
+            this.router.navigate(['/profile']);
+            
           },
             (error) => {
               this.toastr.error('Có lỗi xảy ra khi tải dữ liệu', 'Lỗi');

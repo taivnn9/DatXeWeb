@@ -50,7 +50,7 @@ export class MeComponent implements OnInit {
   }
 
   loadAllBookingHistory() {
-    this.bookingService.getProviderBookingHistory().toPromise().then(
+    this.bookingService.getConsumerBookingHistory().toPromise().then(
       (response: ResponseBody) => {
         this.bookings = response.detail;
         this.bookings.sort((a, b) => a.status - b.status);

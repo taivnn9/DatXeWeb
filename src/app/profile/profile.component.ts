@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
         this.driver = response.detail;
       },
       error => {
-        this.toastr.error(`Lỗi khi lấy danh sách`);
+        this.toastr.error(`Lỗi khi lấy thông tin tài xế`);
       })
   }
   userProfile() {

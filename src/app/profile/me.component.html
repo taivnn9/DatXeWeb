@@ -40,7 +40,7 @@
             <thead>
 
               <tr>
-                <th colspan="4">Thông tin đặt xe</th>
+                <th colspan="3">Thông tin đặt xe</th>
               </tr>
             </thead>
             <tbody>
@@ -60,10 +60,13 @@
 
                 <td>{{booking.cost}}</td>
 
-                <td>{{GetStatusText(booking.status)}}</td>
                 <td>
-                  <p class="p_link" (click)="onOpenPopup(booking)">Chi tiết</p>
+                  <span class="badge bg-success">{{GetStatusText(booking.status)}}</span>
+                  
                 </td>
+                <!--<td>
+                  <p class="p_link" (click)="onOpenPopup(booking)">Chi tiết</p>
+                </td>-->
               </tr>
 
               <tr *ngIf="bookings.length == 0">

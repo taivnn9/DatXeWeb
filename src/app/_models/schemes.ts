@@ -78,7 +78,7 @@ export class Driver {
   photoIds: string[];
   vehicleIds: string[];
   accountId: string;
-  driveApprovalStatus: number
+  status: number
 
   nationalId : string
   nationalImages: string[];
