@@ -1,7 +1,173 @@
+
+
 <div id="booking" class="section">
   <div class="section-center">
     <div class="container">
-      <div class="row">
+
+
+      <div class="booking-form">
+        <!--export class Booking {
+        id: string;
+        fromLocation: Address = new Address();
+        toLocation: Address = new Address();
+        startTime: string;
+        endTime: string;
+        name: string;
+        consumerId: string;
+        providerId: string;
+        carId: string;
+        equipmentIds: string[];
+        medicIds: string[];
+        note: string;
+        type: number;
+        cost: number;
+        status: number;
+        }-->
+        <form>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <span class="form-label">Điểm đón</span>
+                <input class="form-control" type="text" placeholder="Nhập địa chỉ điểm đón" [(ngModel)]="currentBooking.fromLocation['name']">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <span class="form-label">Điểm trả</span>
+                <input class="form-control" type="text" placeholder="Nhập địa chỉ  điểm trả" [(ngModel)]="currentBooking.toLocation.name">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <span class="form-label">Giờ đón mong muốn</span>
+                <input class="form-control" type="date" required [(ngModel)]="currentBooking.startTime">
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <!--<span class="form-label">Xe</span>-->
+                <div class="card-body table-responsive p-0" style="min-height: 100px;">
+                  <table class="table table-head-fixed">
+                    <thead>
+                      <tr>
+                        <th>Tên xe</th>
+                        <th>Đời xe</th>
+                        <th>Giá tiền</th>
+                        <th>Chọn</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of vehicles">
+                        <td>{{item.name}}</td>
+                        <td>{{item.year}}</td>
+                        <td>{{item.cost}} VNĐ</td>
+                        <td>
+                          <input name="options" ng-control="options" type="radio" [value]="item.id" [(ngModel)]="currentBooking.carId"><br />
+
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+                <span class="select-arrow"></span>
+              </div>
+
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <!--<span class="form-label">Trang thiết bị</span>-->
+                <div class="card-body table-responsive p-0" style="min-height: 100px;">
+                  <table class="table table-head-fixed">
+                    <thead>
+                      <tr>
+                        <th>Tên trang thiết bị</th>
+                        <th>Đơn vị</th>
+                        <th>Giá tiền</th>
+                        <th>Chọn</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of equipments">
+                        <td>{{item.name}}</td>
+                        <td>{{item.unit}}</td>
+                        <td>{{item.cost}} VNĐ</td>
+                        <td>
+                          <input type="checkbox" (change)="ClickItemAction($event, 'equipmentIds', item.id)">
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+                <span class="select-arrow"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <!--<span class="form-label">Trang thiết bị</span>-->
+                <div class="card-body table-responsive p-0" style="min-height: 100px;">
+                  <table class="table table-head-fixed">
+                    <thead>
+                      <tr>
+                        <th>Nhân viên y tế</th>
+                        <th>Loại dịch vụ</th>
+                        <th>Chi phí</th>
+                        <th>Chọn</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of equipments">
+                        <td>{{item.name}}</td>
+                        <td>{{item.unit}}</td>
+                        <td>{{item.cost}} VNĐ</td>
+                        <td>
+                          <input type="checkbox" (change)="ClickItemAction($event, 'medicIds', item.id)">
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+                <span class="select-arrow"></span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <span class="form-label">Ghi chú</span>
+                <textarea style="height: 178px;" name="inputBooking_toLocation" class="form-control" rows="3" [(ngModel)]="currentBooking.note"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-9">
+              <div class="form-group">
+                <span class="form-label">Giá tiền tạm tính</span>
+                <input class="form-control" type="number" disabled [(ngModel)]="currentBooking.cost">
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <span class="form-label">Ước lượng chi phí</span>
+                <button class="submit-btn" (click)="SubmitBooking()">Tính toán giá tiền</button>
+              </div>
+            </div>
+          </div>
+
+          
+          
+        </form>
+      </div>
+
+      <!--<div class="row">
         <div class="col-md-7 col-md-push-5">
           <div class="booking-cta">
             <h1>Make your reservation</h1>
@@ -13,68 +179,8 @@
           </div>
         </div>
         <div class="col-md-4 col-md-pull-7">
-          <div class="booking-form">
-            <form>
-              <div class="form-group">
-                <span class="form-label">Your Destination</span>
-                <input class="form-control" type="text" placeholder="Enter a destination or hotel name">
-              </div>
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <span class="form-label">Check In</span>
-                    <input class="form-control" type="date" required>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <span class="form-label">Check out</span>
-                    <input class="form-control" type="date" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-4">
-                  <div class="form-group">
-                    <span class="form-label">Rooms</span>
-                    <select class="form-control">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                    </select>
-                    <span class="select-arrow"></span>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="form-group">
-                    <span class="form-label">Adults</span>
-                    <select class="form-control">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                    </select>
-                    <span class="select-arrow"></span>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="form-group">
-                    <span class="form-label">Children</span>
-                    <select class="form-control">
-                      <option>0</option>
-                      <option>1</option>
-                      <option>2</option>
-                    </select>
-                    <span class="select-arrow"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="form-btn">
-                <button class="submit-btn">Check availability</button>
-              </div>
-            </form>
-          </div>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
 </div>

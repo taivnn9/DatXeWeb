@@ -1,4 +1,5 @@
-import { BookingStatus, BookingType, Sex } from './enum';
+import { Sex } from './enum';
+
 
 export class ResponseBody {
   status: number;
@@ -29,8 +30,19 @@ export enum Role {
 
 export class Equipment {
   id: string;
-  name: string;
   cost: number;
+  name: string;
+  unit: string;
+  class: string;
+  equipmentImages: string[];
+  status: number;
+}
+export class Medic {
+  id: string;
+  name: string;
+  unit: string;
+  cost: number;
+  status: number;
 }
 
 export class Image {
@@ -95,42 +107,55 @@ export enum AccountStatus {
   Disabled
 }
 
-export enum VehicleApprovalStatus {
+export class Address {
+  name: string = "";
+  street: string = "";
+  city: string = "";
+  state: string = "";
+  zipCode: string = "";
+}
+export class Booking {
+  id: string;
+  fromLocation: Address = new Address();
+  toLocation: Address = new Address();
+  startTime: string = "";
+  endTime: string = "";
+  name: string = "";
+  consumerId: string = "";
+  providerId: string = "";
+  carId: string = "";
+  equipmentIds: string[] = [];
+  medicIds: string[] = [];
+  note: string = "";
+  type: number = 0;
+  cost: number = 0;
+  status: number = 0;
+}
+export enum VehicleStatus {
+  Registration = 0,
+  Approved = 1,
+  Rejected = 2
+}
+export enum DriverStatus {
   Registration,
   Approved,
   Rejected
 }
-export enum DriveApprovalStatus {
-  Registration,
-  Approved,
-  Rejected
+export enum BookingStatus {
+  ConsumerRegistration,
+  ConsumerConfirmation,
+  ProviderConfirmation,
+  ProviderOnWay,
+  ProviderAreServing,
+  Finished
 }
 export enum EquipmentStatus {
   Avaiable,
   Disabled
 }
 
-export class location {
-  name: string;
-  street: string;
-  city: string;
-  state: string;
-  zipCode: string;
-}
-export class Booking {
-  id: string;
-  fromLocation:location;
-  toLocation: location;
-  startTime: string;
-  endTime: string;
-  name: string;
-  consumerId: string;
-  providerId: string;
-  carId: string;
-  equipmentIds: string[];
-  medicIds: string[];
-  note : string
-  cost: string[];
-  status: BookingStatus;
-  type:BookingType;
+
+export enum BookingType {
+  VehicleBooking,
+  HomeCareBooking
 }

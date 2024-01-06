@@ -9,6 +9,17 @@ import { ResponseBody } from '../_models/schemes';
 export class BookingService {
   constructor(private http: HttpClient) { }
 
+  getAllVehicleAvailable() {
+    return this.http.get(`${environment.apiUrl}/vehicles`);
+  }
+
+  getAllEquipmentAvailable() {
+    return this.http.get(`${environment.apiUrl}/equipments`);
+  }
+  getAllMedicAvailable() {
+    return this.http.get(`${environment.apiUrl}/medics`);
+  }
+
   getAllBookingAvailable() {
     return this.http.get(`${environment.apiUrl}/booking/provider/avaiable`);
   }
@@ -45,4 +56,18 @@ export class BookingService {
       }));
   }
 
+
+  enumToMap(enumeration: any) {
+    let converted = new Array()
+
+    Object.keys(enumeration).map(key => {
+      if (typeof enumeration[key] === "number")
+        converted.push({
+          id: enumeration[key],
+          name: key,
+        });
+    });
+
+    return converted
+  }
 }
