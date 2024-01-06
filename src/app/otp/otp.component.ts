@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 //import { environment } from '@environments/environment';
 import { BookingService } from '../services/booking.service';
 import { environment } from '../../environments/environment.prod';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-otp',
@@ -29,8 +30,8 @@ export class OtpComponent implements OnInit {
   selectedDistrictTo: any = null
   selectedWardTo: any = null
 
-
-
+  displayButtonTitle: string = 'Đặt dịch vụ ngay'
+  
 
   displayPopupValue: string = 'none'
   displayPopupTile: string = 'none'
@@ -38,6 +39,7 @@ export class OtpComponent implements OnInit {
 
 
   constructor(
+    private router: Router,
     private bookingService: BookingService,
     private toastr: ToastrService) { }
 
@@ -155,13 +157,6 @@ export class OtpComponent implements OnInit {
   GetItemsFromMap(mapName) {
 
   }
-  ParseAddress(address: Address) {
-    try { return `${address.street} ${address.city} ${address.state} ` }
-    catch {
-      return ``
-    }
-
-  }
 
   ClickItemAction(event: any, field: string, id: string,) {
 
@@ -179,10 +174,92 @@ export class OtpComponent implements OnInit {
   }
 
   SubmitBooking() {
-    console.log(this.currentBooking)
-
-    
+    if (this.currentBooking.id == undefined || this.currentBooking.id == '') {
+      this.RegistrationBooking()
+    } else if (this.currentBooking.status == 0) {
+      this.ConfimationBooking()
+    } else if (this.currentBooking.status == 1) {
+      // goto manage history
+      this.router.navigate(['/profile']);
+    }
   }
+  ConfimationBooking() {
+    this.bookingService.consumerConfirmation(this.currentBooking).toPromise().then(
+      (response: ResponseBody) => {
+        this.currentBooking = response.detail;
+        this.loading = false
+        this.toastr.success(`Đặt dịch vụ thành công, tổng đài viên sẽ liên hệ đến quý khách sớm nhất`);
+        this.displayButtonTitle = 'Quản lý dịch vụ đang đặt'
+      },
+      error => {
+        this.toastr.error(`Có lỗi khi xác nhận đặt dịch vụ`);
+        this.loading = false
+      })
+  }
+  RegistrationBooking() {
+    this.loading = true
+    console.log(this.currentBooking)
+    let exceptions = []
+
+    if (this.selectedCityFrom == null || this.selectedCityTo == null) {
+      exceptions.push("Tỉnh/thành phố đang để trống")
+    }
+    if (this.selectedDistrictFrom == null || this.selectedDistrictTo == null) {
+      exceptions.push("Quận/huyện đang để trống")
+    }
+    if (this.selectedWardFrom == null || this.selectedWardTo == null) {
+      exceptions.push("Xã/phường đang để trống")
+    }
+
+    if (this.currentBooking.carId == "") {
+      exceptions.push("Loại phương tiện đang để trống")
+    }
+    if (this.currentBooking.startTime == "") {
+      exceptions.push("Ngày đặt xe đang để trống")
+    }
+
+    if (exceptions.length > 0) {
+      this.toastr.error(`Có lỗi nhập liệu, vui lòng điền các trường bắt buộc`);
+      exceptions.forEach(err => {
+        this.toastr.error(err);
+      })
+      this.loading = false
+    } else {
+      this.currentBooking.fromLocation.city = this.selectedCityFrom.Name
+      this.currentBooking.fromLocation.district = this.selectedDistrictFrom.Name
+      this.currentBooking.fromLocation.ward = this.selectedWardFrom.Name
+
+      this.currentBooking.toLocation.city = this.selectedCityTo.Name
+      this.currentBooking.toLocation.district = this.selectedDistrictTo.Name
+      this.currentBooking.toLocation.ward = this.selectedWardTo.Name
+
+      this.currentBooking.endTime = "2025-11-11"
 
 
+      this.bookingService.consumerRegistration(this.currentBooking).toPromise().then(
+        (response: ResponseBody) => {
+          this.currentBooking = response.detail;
+          this.loading = false
+          this.displayButtonTitle = 'Xác nhận đặt dịch vụ'
+          this.toastr.success(`Đăng ký đặt dịch vụ thành công, vui lòng xác nhận đặt dịch vụ`);
+        },
+        error => {
+          this.toastr.error(`Có lỗi khi đặt dịch vụ`);
+          this.loading = false
+        })
+
+      console.log(this.currentBooking)
+    }
+  }
+  getYesterdayDate(): string {
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(today.getDate() - 1);
+
+  const year = yesterday.getFullYear();
+  const month = (yesterday.getMonth() + 1).toString().padStart(2, '0');
+  const day = yesterday.getDate().toString().padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+}
 }

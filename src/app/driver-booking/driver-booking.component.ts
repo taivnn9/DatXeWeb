@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { BookingService } from '../services/booking.service';
-import { Booking, ResponseBody } from '../_models/schemes';
+import { Address, Booking, Driver, ResponseBody } from '../_models/schemes';
 import { BookingStatus } from '../_models/enum';
+import { Router } from '@angular/router';
+import { environment } from '../../environments/environment.prod';
 
 @Component({
   selector: 'app-driver-booking',
@@ -12,59 +14,45 @@ import { BookingStatus } from '../_models/enum';
   providers: []
 })
 export class DriverBookingComponent implements OnInit {
-  user : any = localStorage.getItem("currentUser");
-  availableBookings: Booking[];
-  historyBookings: Booking[];
-  listBookingInTrip: Booking[]
-  selectedBooking: Booking;
+
+  driver: Driver = new Driver()
+  bookings: Booking[] = [];
+  booking: Booking = new Booking();
   showSuccess: boolean = false;
+
+
+  displayPopupValue: string = 'none'
+  displayPopupTile: string = 'Chi tiết chuyến đi'
+
   constructor(
-    private authService: AuthService,
     private toastr: ToastrService,
     private bookingService: BookingService
   ) { }
 
   ngOnInit(): void {
-    //this.loadAllBookingAvailable();
     this.loadAllBookingHistory();
   }
+  
 
-  logout() {
-    this.authService.logout().subscribe(
-      (response) => {
-        localStorage.removeItem('currentUser');
-        this.user = null;
-      },
-      (error) => {
-        this.toastr.error('Có lỗi xảy ra khi tải dữ liệu', 'Lỗi');
-      }
-    );
-  }
-
-  loadAllBookingAvailable() {
-    this.bookingService.getAllBookingAvailable().toPromise().then(
-      (response: ResponseBody) => {
-        this.availableBookings = response.detail;
-      },
-      error => {
-        this.toastr.error(`Lỗi khi lấy danh sách`);
-      })
-  }
 
   loadAllBookingHistory() {
-    this.bookingService.getAllBookingHistory().toPromise().then(
+    this.bookingService.getProviderBookingHistory().toPromise().then(
       (response: ResponseBody) => {
-        this.historyBookings = response.detail;
-        this.historyBookings.sort((a, b) => a.status - b.status);
-        this.listBookingInTrip = this.historyBookings.filter(obj => obj.status == BookingStatus.ProviderConfirmation || obj.status == BookingStatus.ProviderOnWay || obj.status == BookingStatus.ProviderAreServing);
-      },
+        this.bookings = response.detail;
+        this.bookings.sort((a, b) => a.status - b.status);
+
+        },
       error => {
-        this.toastr.error(`Lỗi khi lấy danh sách`);
+        this.toastr.error(`Lỗi khi lấy danh sách lịch sử chuyến đi`);
       })
   }
 
-  showBookingDetails(booking: any) {
-    this.selectedBooking = booking; // Lưu booking được chọn
+  onOpenPopup(item: Booking) {
+    this.displayPopupValue = 'block'
+    this.booking = item
+  }
+  onClosePopup() {
+    this.displayPopupValue = 'none'
   }
 
   providerConfirmation(booking: any) {
@@ -116,6 +104,22 @@ export class DriverBookingComponent implements OnInit {
       error => {
         this.toastr.error(`Thử lại sau`, `Thất bại`);
       })
+  }
+
+
+
+  GetStatusText(value: number) {
+    return BookingStatus[value];
+  }
+  GetImageUrl(imageId: string) {
+    return `${environment.apiUrl}/image/${imageId}`
+  }
+  ParseAddress(address: Address) {
+    try { return `${address.city} - ${address.district} - ${address.ward} ` }
+    catch {
+      return ``
+    }
+
   }
 
 }

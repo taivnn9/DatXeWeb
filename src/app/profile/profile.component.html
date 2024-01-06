@@ -1,5 +1,5 @@
 
-<div class="rt-container" style="height: 600px;">
+<div class="rt-container">
   <div class="col-rt-12">
     <div class="Scriptcontent">
       <div class="student-profile py-4">
@@ -9,78 +9,32 @@
               <div class="card shadow-sm">
                 <div class="card-header bg-transparent text-center">
                   <img class="profile_img" src="https://source.unsplash.com/600x300/?student" alt="student dp">
-                  <h3>{{profile.name}}</h3>
+                  <h3>{{user.name}}</h3>
                 </div>
                 <div class="card-body text-center text-end">
-                  <p class="mb-0 text-center text-end"><i class="fa-solid fa-user"></i><a class="text-decoration-none text-dark" href="#">Thông tin tài khoản</a></p>
-                  <p class="mb-0 text-center text-end"><i class="fa fa-sign-out" aria-hidden="true"></i><label class="text-decoration-none text-dark" (click)="logout()">Đăng xuất</label></p>
+                  <p *ngIf="!driver" class="mb-0 text-center text-end">
+                    <i class="fa-solid fa-user"></i>
+                    <a class="text-decoration-none text-dark" [routerLink]="['/profile/become-driver']">&nbsp; Trở thành tài xế</a>
+                  </p>
+                  <p class="mb-0 text-center text-end">
+                    <i class="fa-solid fa-user"></i>
+                    <a class="text-decoration-none text-dark" [routerLink]="['/profile/me']">&nbsp; Quản lý cá nhân</a>
+                  </p>
+                  <p *ngIf="driver" class="mb-0 text-center text-end">
+                    <i class="fa-solid fa-user"></i>
+                    <a class="text-decoration-none text-dark" [routerLink]="['/profile/driver']">&nbsp; Quản lý tài xế</a>
+                  </p>
+                  <!--<p *ngIf="!driver" class="mb-0 text-center text-end"><i class="fa-solid fa-user"></i>&nbsp; Trở thành tài xế</p>
+                  <p *ngIf="driver" class="mb-0 text-center text-end"><i class="fa-solid fa-user"></i>&nbsp; Quản lý tài xế</p>-->
+                  <p class="mb-0 text-center text-end">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    <label class="text-decoration-none text-dark" (click)="logout()"> &nbsp;Đăng xuất</label>
+                  </p>
                 </div>
               </div>
             </div>
             <div class="col-lg-8">
-              <div class="card shadow-sm">
-                <div class="card-header bg-transparent border-0">
-                  <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Thông tin tài khoản</h3>
-                </div>
-                <div class="card-body pt-0">
-                  <table class="table">
-                    <tbody>
-                      <tr>
-                        <td>
-                          Họ và tên
-                        </td>
-                        <td>
-                          {{profile.name}}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Giới tính
-                        </td>
-                        <td>
-                          {{profile.sex == 0 ? 'Nam' : 'Nữ'}}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Ngày sinh
-                        </td>
-                        <td>
-                          {{profile.dob}}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Địa chỉ
-                        </td>
-                        <td>
-                          {{profile.address}}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div style="height: 26px"></div>
-              <div class="card shadow-sm">
-                <div class="card-header bg-transparent border-0">
-                  <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Thông tin khác</h3>
-                </div>
-                <div class="card-body pt-0">
-                  <div class="col-md-12">
-                    <div>Ảnh chân dung</div>
-                    <div class="centered-content">
-                      <img [src]="" alt="Selected Image" class="custom-image">
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div>Ảnh CCCD/CMT</div>
-                    <div class="centered-content">
-                      <img [src]="" alt="Selected Image" class="custom-image">
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <router-outlet></router-outlet>
             </div>
           </div>
         </div>

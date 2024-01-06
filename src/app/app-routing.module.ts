@@ -8,14 +8,24 @@ import { LoginComponent } from './login/login.component';
 import { OtpComponent } from './otp/otp.component';
 import { DriverBookingComponent } from './driver-booking/driver-booking.component';
 import { AuthGuard } from './auth.guard';
+import { MeComponent } from './profile/me.component';
 
 const routes: Routes = [
   {
     path: '', component: HomeComponent, children: [
-      { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-      { path: 'register', component: RegisterComponent },
-      { path: '', component: OtpComponent },
-      { path: 'driver-booking', component: DriverBookingComponent, canActivate: [AuthGuard] },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        canActivate: [AuthGuard],
+        children: [
+          { path: 'become-driver', component: RegisterComponent, canActivate: [AuthGuard] },
+          { path: 'driver', component: DriverBookingComponent, canActivate: [AuthGuard] },
+          { path: 'me', component: MeComponent, canActivate: [AuthGuard] },
+          { path: '', component: MeComponent, canActivate: [AuthGuard] }
+        ]
+      },
+      
+      { path: '', component: OtpComponent }
     ]
   },
   { path: 'login', component: LoginComponent },

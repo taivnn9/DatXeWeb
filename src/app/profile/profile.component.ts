@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { Driver, ResponseBody } from '../_models/schemes';
-import { BookingStatus } from '../_models/enum';
+import { Driver, ResponseBody, Account } from '../_models/schemes';
 import { VehicleService } from '../services/vehicle.service';
 
 @Component({
@@ -13,8 +12,8 @@ import { VehicleService } from '../services/vehicle.service';
 })
 export class ProfileComponent implements OnInit {
 
-  user : any = localStorage.getItem("currentUser");
-  profile: Driver;
+  user: Account
+  driver: Driver;
   constructor(
     private authService: AuthService,
     private toastr: ToastrService,
@@ -23,9 +22,11 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (!this.user){
-      this.router.navigate(['/login']);
-    }
+    //if (!this.user) {
+    //  this.router.navigate(['/login']);
+    //}
+
+    this.userProfile();
     this.driverProfile();
   }
   logout() {
@@ -44,11 +45,16 @@ export class ProfileComponent implements OnInit {
   driverProfile() {
     this.vehicleService.driverProfile().toPromise().then(
       (response: ResponseBody) => {
-        if (response.status == 200) {
-          this.profile = response.detail;
-        }else {
-          this.router.navigate(['/']);
-        }
+        this.driver = response.detail;
+      },
+      error => {
+        this.toastr.error(`Lỗi khi lấy danh sách`);
+      })
+  }
+  userProfile() {
+    this.vehicleService.userProfile().toPromise().then(
+      (response: ResponseBody) => {
+        this.user = response.detail;
       },
       error => {
         this.toastr.error(`Lỗi khi lấy danh sách`);

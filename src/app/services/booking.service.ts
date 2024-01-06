@@ -30,8 +30,25 @@ export class BookingService {
     return this.http.get(`${environment.apiUrl}/booking/provider/avaiable`);
   }
 
-  getAllBookingHistory() {
+  getConsumerBookingHistory() {
+    return this.http.get(`${environment.apiUrl}/booking/consumer/history`);
+  }
+  getProviderBookingHistory() {
     return this.http.get(`${environment.apiUrl}/booking/provider/history`);
+  }
+
+  consumerRegistration(booking: any) {
+    return this.http.post<any>(`${environment.apiUrl}/booking/consumer/registration`, booking)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  consumerConfirmation(booking: any) {
+    return this.http.post<any>(`${environment.apiUrl}/booking/consumer/confirmation?id=${booking.id}`, {})
+      .pipe(map(res => {
+        return res;
+      }));
   }
 
   providerConfirmation(booking: any) {

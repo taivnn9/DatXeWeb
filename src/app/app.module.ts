@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { OtpComponent } from './otp/otp.component';
 import { DriverBookingComponent } from './driver-booking/driver-booking.component';
 import { Interceptor } from './interceptor';
+import { MeComponent } from './profile/me.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { Interceptor } from './interceptor';
     HomeComponent,
     HeaderComponent,
     ProfileComponent,
+    MeComponent,
     RegisterComponent,
     LoginComponent,
     OtpComponent,

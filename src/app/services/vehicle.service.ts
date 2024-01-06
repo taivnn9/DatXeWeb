@@ -32,4 +32,7 @@ export class VehicleService {
   driverProfile() {
     return this.http.get(`${environment.apiUrl}/driver-profile`);
   }
+  userProfile() {
+    return this.http.get(`${environment.apiUrl}/me`);
+  }
 }

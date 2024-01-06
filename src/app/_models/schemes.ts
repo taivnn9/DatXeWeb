@@ -108,12 +108,7 @@ export enum AccountStatus {
 }
 
 export class Address {
-  name: string = "";
   street: string = "";
-  
-  state: string = "";
-  zipCode: string = "";
-
   city: string = "";
   district: string = "";
   ward: string = "";
@@ -136,9 +131,12 @@ export class Booking {
   status: number = 0;
 }
 export enum VehicleStatus {
-  Registration = 0,
-  Approved = 1,
-  Rejected = 2
+  Registration,
+  Approved,
+  Rejected,
+  Avaiable,
+  WaitForRent,
+  Disabled
 }
 export enum DriverStatus {
   Registration,
