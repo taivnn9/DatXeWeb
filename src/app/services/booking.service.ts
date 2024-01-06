@@ -9,6 +9,12 @@ import { ResponseBody } from '../_models/schemes';
 export class BookingService {
   constructor(private http: HttpClient) { }
 
+  DiaGioiHanhChinhVN() {
+    return this.http.get(`https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json`); 
+  }
+
+
+
   getAllVehicleAvailable() {
     return this.http.get(`${environment.apiUrl}/vehicles`);
   }

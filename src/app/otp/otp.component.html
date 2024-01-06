@@ -6,46 +6,94 @@
 
 
       <div class="booking-form">
-        <!--export class Booking {
-        id: string;
-        fromLocation: Address = new Address();
-        toLocation: Address = new Address();
-        startTime: string;
-        endTime: string;
-        name: string;
-        consumerId: string;
-        providerId: string;
-        carId: string;
-        equipmentIds: string[];
-        medicIds: string[];
-        note: string;
-        type: number;
-        cost: number;
-        status: number;
-        }-->
         <form>
+          <br />
           <div class="row">
+            <div class="col-sm-12">
+              <b>Điểm đón</b>
+            </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <span class="form-label">Điểm đón</span>
-                <input class="form-control" type="text" placeholder="Nhập địa chỉ điểm đón" [(ngModel)]="currentBooking.fromLocation['name']">
+                <span class="form-label">Tỉnh/ thành phố</span>
+                <select class="form-control" (change)="onChange('from')" [(ngModel)]="selectedCityFrom" name="selectedCityFrom">
+                  <option *ngFor="let item of diaGioiHanhChinhVN" [ngValue]="item">
+                    {{item.Name}}
+                  </option>
+                </select>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <span class="form-label">Điểm trả</span>
-                <input class="form-control" type="text" placeholder="Nhập địa chỉ  điểm trả" [(ngModel)]="currentBooking.toLocation.name">
+                <span class="form-label">Quận/ huyện</span>
+                <select class="form-control" [(ngModel)]="selectedDistrictFrom" name="selectedDistrictFrom">
+                  <option *ngFor="let item of selectedCityFrom?.Districts" [ngValue]="item">
+                    {{item.Name}}
+                  </option>
+                </select>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <span class="form-label">Giờ đón mong muốn</span>
+                <span class="form-label">Xã phường</span>
+                <select class="form-control" [(ngModel)]="selectedWardFrom" name="selectedWardFrom">
+                  <option *ngFor="let item of selectedDistrictFrom?.Wards" [ngValue]="item">
+                    {{item.Name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <br />
+          <div class="row">
+            <div class="col-sm-12">
+              <b>Điểm đến</b>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <span class="form-label">Tỉnh/ thành phố</span>
+                <select class="form-control" (change)="onChange('to')" [(ngModel)]="selectedCityTo" name="selectedCityTo">
+                  <option *ngFor="let item of diaGioiHanhChinhVN" [ngValue]="item">
+                    {{item.Name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <span class="form-label">Quận/ huyện</span>
+                <select class="form-control" [(ngModel)]="selectedDistrictTo" name="selectedDistrictTo">
+                  <option *ngFor="let item of selectedCityTo?.Districts" [ngValue]="item">
+                    {{item.Name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <span class="form-label">Xã phường</span>
+                <select class="form-control" [(ngModel)]="selectedWardTo" name="selectedWardTo">
+                  <option *ngFor="let item of selectedDistrictTo?.Wards" [ngValue]="item">
+                    {{item.Name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <br />
+
+
+          <div class="row">
+
+            <div class="col-sm-4">
+              <div class="form-group">
+                <b class="form-label">Ngày đặt xe</b>
                 <input class="form-control" type="date" required [(ngModel)]="currentBooking.startTime">
               </div>
             </div>
           </div>
 
-
+          <br />
 
           <div class="row">
             <div class="col-sm-6">
@@ -55,20 +103,25 @@
                   <table class="table table-head-fixed">
                     <thead>
                       <tr>
-                        <th>Tên xe</th>
-                        <th>Đời xe</th>
-                        <th>Giá tiền</th>
-                        <th>Chọn</th>
+                        <th colspan="4">Lựa chọn phương tiện</th>
+                        <!--<th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>-->
                       </tr>
                     </thead>
                     <tbody>
                       <tr *ngFor="let item of vehicles">
-                        <td>{{item.name}}</td>
-                        <td>{{item.year}}</td>
-                        <td>{{item.cost}} VNĐ</td>
+                        <td>
+                          Loại xe: {{item.name}}
+                        </td>
+                        <td>Đời xe: {{item.year}}</td>
+                        <td>Đơn giá: {{item.cost}} VNĐ</td>
+                        <td>
+                          <p class="p_link">Chi tiết</p>
+                        </td>
                         <td>
                           <input name="options" ng-control="options" type="radio" [value]="item.id" [(ngModel)]="currentBooking.carId"><br />
-
                         </td>
                       </tr>
 
@@ -86,10 +139,11 @@
                   <table class="table table-head-fixed">
                     <thead>
                       <tr>
-                        <th>Tên trang thiết bị</th>
-                        <th>Đơn vị</th>
-                        <th>Giá tiền</th>
-                        <th>Chọn</th>
+                        <th colspan="4">Lựa chọn trang thiết bị</th>
+                        <!--<th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>-->
                       </tr>
                     </thead>
                     <tbody>
@@ -97,6 +151,9 @@
                         <td>{{item.name}}</td>
                         <td>{{item.unit}}</td>
                         <td>{{item.cost}} VNĐ</td>
+                        <td>
+                          <p class="p_link">Chi tiết</p>
+                        </td>
                         <td>
                           <input type="checkbox" (change)="ClickItemAction($event, 'equipmentIds', item.id)">
                         </td>
@@ -117,10 +174,11 @@
                   <table class="table table-head-fixed">
                     <thead>
                       <tr>
-                        <th>Nhân viên y tế</th>
-                        <th>Loại dịch vụ</th>
-                        <th>Chi phí</th>
-                        <th>Chọn</th>
+                        <th colspan="4">Lựa chọn Nhân viên y tế</th>
+                        <!--<th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>-->
                       </tr>
                     </thead>
                     <tbody>
@@ -128,6 +186,9 @@
                         <td>{{item.name}}</td>
                         <td>{{item.unit}}</td>
                         <td>{{item.cost}} VNĐ</td>
+                        <td>
+                          <p class="p_link">Chi tiết</p>
+                        </td>
                         <td>
                           <input type="checkbox" (change)="ClickItemAction($event, 'medicIds', item.id)">
                         </td>
@@ -141,29 +202,33 @@
             </div>
             <div class="col-sm-6">
               <div class="form-group">
-                <span class="form-label">Ghi chú</span>
+                <b class="form-label">Ghi chú</b>
                 <textarea style="height: 178px;" name="inputBooking_toLocation" class="form-control" rows="3" [(ngModel)]="currentBooking.note"></textarea>
               </div>
             </div>
           </div>
 
+          <br/>
+
           <div class="row">
-            <div class="col-sm-9">
+            <div class="col-sm-12">
               <div class="form-group">
-                <span class="form-label">Giá tiền tạm tính</span>
+                <b class="form-label">Giá tiền tạm tính</b>
                 <input class="form-control" type="number" disabled [(ngModel)]="currentBooking.cost">
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <span class="form-label">Ước lượng chi phí</span>
-                <button class="submit-btn" (click)="SubmitBooking()">Tính toán giá tiền</button>
               </div>
             </div>
           </div>
 
-          
-          
+          <div class="row">
+            <div class="col-sm-12">
+              <div _ngcontent-jbl-c52="" class="flex-center mt-6">
+                <button (click)="SubmitBooking()" _ngcontent-jbl-c52="" class="px-3 py-2 rounded font-semibold border border-green bg-green text-white"> Đặt dịch vụ ngay </button>
+              </div>
+            </div>
+          </div>
+
+
+
         </form>
       </div>
 

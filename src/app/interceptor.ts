@@ -16,10 +16,15 @@ export class Interceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token: any = localStorage.getItem("currentUser");
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Authorization', 'Bearer ' + token);
+    let headers = new HttpHeaders()
+    if (!request.url.includes('https://raw.githubusercontent.com')) {
+
+      const token: any = localStorage.getItem("currentUser");
+      headers = new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        .set('Authorization', 'Bearer ' + token);
+      
+    }
     const AuthRequest = request.clone({ headers: headers });
     return next.handle(AuthRequest);
   }

@@ -110,9 +110,13 @@ export enum AccountStatus {
 export class Address {
   name: string = "";
   street: string = "";
-  city: string = "";
+  
   state: string = "";
   zipCode: string = "";
+
+  city: string = "";
+  district: string = "";
+  ward: string = "";
 }
 export class Booking {
   id: string;
@@ -158,4 +162,49 @@ export enum EquipmentStatus {
 export enum BookingType {
   VehicleBooking,
   HomeCareBooking
+}
+
+
+export class TinhThanh {
+  MA_TINH: string;
+  TEN_TINH: string;
+  servername?: any;
+  databasename?: any;
+  username?: any;
+  password?: any;
+  servicename?: any;
+  port: number;
+  phrservername?: any;
+  phrdatabasename?: any;
+  phrusername?: any;
+  phrpassword?: any;
+  phrservicename?: any;
+  phrport: number;
+  hphrservername?: any;
+  hphrdatabasename?: any;
+  hphrusername?: any;
+  hphrpassword?: any;
+  hphrservicename?: any;
+  hphrport: number;
+  ws?: any;
+  dbgoc?: any;
+  webkhaosat?: any;
+  username_login?: any;
+  password_login?: any;
+  TuDongCapNhat?: any;
+  KhoangTGCho_CapNhat?: any;
+}
+
+export class QuanHuyen {
+  MA_QUAN: string;
+  TEN_QUAN: string;
+  MA_TINH: string;
+}
+
+export class PhuongXa {
+  MA_XA: string;
+  TEN_XA: string;
+  MA_TINH: string;
+  MA_QUAN: string;
+  TEN_DAY_DU: string;
 }
