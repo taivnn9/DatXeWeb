@@ -9,12 +9,11 @@ import { environment } from '../../environments/environment.prod';
 import { VehicleService } from '../services/vehicle.service';
 
 @Component({
-  selector: 'app-driver-booking',
-  templateUrl: './driver-booking.component.html',
-  styleUrls: ['./driver-booking.component.css'],
+  selector: 'app-driver',
+  templateUrl: './driver.component.html',
   providers: []
 })
-export class DriverBookingComponent implements OnInit {
+export class DriverComponent implements OnInit {
 
   driver: Driver = new Driver()
   bookings: Booking[] = [];

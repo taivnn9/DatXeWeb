@@ -1,0 +1,22 @@
+
+
+
+<div id="booking" class="section">
+  <div class="section-center">
+    <div class="container">
+
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <a class="nav-link" (click)="activeTab='vehicle-booking'" [ngClass]="activeTab == 'vehicle-booking' ? 'active': ''" aria-current="page" [routerLink]="['/vehicle-booking']">Đặt xe cứu thương</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="activeTab='homecare-booking'" [ngClass]="activeTab == 'homecare-booking' ? 'active': ''" [routerLink]="['/homecare-booking']">Đặt chăm sóc tại nhà</a>
+        </li>
+      </ul>
+
+      <router-outlet></router-outlet>
+
+    </div>
+  </div>
+</div>
+

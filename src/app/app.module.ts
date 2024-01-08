@@ -8,26 +8,28 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
-import {HeaderComponent} from './layout/header/header.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import { OtpComponent } from './otp/otp.component';
-import { DriverBookingComponent } from './driver-booking/driver-booking.component';
+import { BookingComponent } from './booking/booking.component';
+import { DriverComponent } from './profile/driver.component';
 import { Interceptor } from './interceptor';
 import { MeComponent } from './profile/me.component';
+import { VehicleBookingComponent } from './booking/vehicle-booking.component';
+import { HomeCareBookingComponent } from './booking/homecare-booking.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    HeaderComponent,
     ProfileComponent,
     MeComponent,
     RegisterComponent,
     LoginComponent,
-    OtpComponent,
-    DriverBookingComponent
+    DriverComponent,
+    BookingComponent,
+    VehicleBookingComponent,
+    HomeCareBookingComponent
   ],
   imports: [
     BrowserModule,

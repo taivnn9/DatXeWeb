@@ -8,11 +8,10 @@ import { environment } from '../../environments/environment.prod';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-otp',
-  templateUrl: './otp.component.html',
-  styleUrls: ['./otp.component.css']
+  selector: 'app-vehicle-booking',
+  templateUrl: './vehicle-booking.component.html'
 })
-export class OtpComponent implements OnInit {
+export class VehicleBookingComponent implements OnInit {
   loading = false;
   currentBooking: Booking = new Booking();
 
@@ -24,14 +23,14 @@ export class OtpComponent implements OnInit {
 
   selectedCityFrom: any = null
   selectedDistrictFrom: any = null
-  selectedWardFrom:  any = null
+  selectedWardFrom: any = null
 
   selectedCityTo: any = null
   selectedDistrictTo: any = null
   selectedWardTo: any = null
 
   displayButtonTitle: string = 'Đặt dịch vụ ngay'
-  
+
 
   displayPopupValue: string = 'none'
   displayPopupTile: string = 'none'
@@ -58,12 +57,12 @@ export class OtpComponent implements OnInit {
       this.displayValue = selectedValue.equipmentImages
       this.displayPopupTile = 'trang thiết bị'
     }
-    
+
   }
   onClosePopup() {
-      this.displayPopupValue = 'none'
+    this.displayPopupValue = 'none'
   }
-  
+
   GetImageUrl(imageId: string) {
     return `${environment.apiUrl}/image/${imageId}`
   }
@@ -126,7 +125,7 @@ export class OtpComponent implements OnInit {
   //  if (field == 'state') {
   //    this.currentBooking[source][field] = this.diaGioiHanhChinhVN.find(x => x.Id == id).Name
 
-      
+
   //  } else if (field == 'city') {
 
   //    this.currentBooking[source][field] = this.quanHuyenMap.get(source).find(x => x.MA_QUAN == id).TEN_QUAN
@@ -252,14 +251,25 @@ export class OtpComponent implements OnInit {
     }
   }
   getYesterdayDate(): string {
-  const today = new Date();
-  const yesterday = new Date(today);
-  yesterday.setDate(today.getDate() - 1);
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
 
-  const year = yesterday.getFullYear();
-  const month = (yesterday.getMonth() + 1).toString().padStart(2, '0');
-  const day = yesterday.getDate().toString().padStart(2, '0');
+    const year = yesterday.getFullYear();
+    const month = (yesterday.getMonth() + 1).toString().padStart(2, '0');
+    const day = yesterday.getDate().toString().padStart(2, '0');
 
-  return `${year}-${month}-${day}`;
-}
+    return `${year}-${month}-${day}`;
+  }
+
+  isActiveTab: string = 'Paris'
+
+  openCity(id: string) {
+    this.isActiveTab = id
+    console.log(this.isActiveTab)
+  }
+
+  getStyle(id: string) {
+    'display:' + ( this.isActiveTab === id ? 'block' : 'none')
+  }
 }

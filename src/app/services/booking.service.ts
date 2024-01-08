@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import { any } from 'codelyzer/util/function';
-import { ResponseBody } from '../_models/schemes';
+import { HomeCare, ResponseBody } from '../_models/schemes';
 
 @Injectable({ providedIn: 'root' })
 export class BookingService {
@@ -93,4 +93,21 @@ export class BookingService {
 
     return converted
   }
+
+
+
+  consumerRegistrationHomeCare(homecare: HomeCare) {
+    return this.http.post(`${environment.apiUrl}/homecare/consumer/registration`, homecare)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  consumerConfirmationHomeCare(homecare: HomeCare) {
+    return this.http.post(`${environment.apiUrl}/homecare/consumer/confirmation?id=${homecare.id}`, {})
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
 }

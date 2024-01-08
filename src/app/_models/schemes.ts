@@ -206,3 +206,20 @@ export class PhuongXa {
   MA_QUAN: string;
   TEN_DAY_DU: string;
 }
+export class HomeCare {
+  id: string;
+  location: Location;
+  startTime: string;
+  consumerId: string;
+  DailyEquipmentIds: RentalDetail[];
+  DailyMedicIds: RentalDetail[];
+  EquipmentIds: RentalDetail[];
+  note: string;
+  cost: number;
+  status: number;
+}
+export class RentalDetail {
+  id: string;
+  Count: number;
+  Note: string;
+}
