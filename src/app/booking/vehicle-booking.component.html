@@ -226,63 +226,11 @@
       <div class="modal-header">
         <b class="modal-title" id="exampleModalLabel">Hình ảnh {{displayPopupTile}}</b>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onClosePopup()">
-          
-
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <!--<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active" *ngFor="let imageId of displayValue">
-              <img class="d-block w-100" src="{{GetImageUrl(imageId)}}" alt="{{imageId}}">
-            </div>
-          </div>
-        </div>-->
-
-
-        <div class="carousel slide" id="slider" data-ride="carousel">
-          <!--indicators-->
-          <ol class="carousel-indicators">
-            <li data-target="#slider" data-slide-to="0" class="active"></li>
-            <li data-target="#slider" data-slide-to="1"></li>
-            <li data-target="#slider" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="https://picsum.photos/1000/600/">
-              <div class="carousel-caption">
-                <h4>Welcome</h4>
-                <p>Travel! Enjoy!</p>
-              </div>
-            </div>
-
-            <div class="carousel-item" id="slide2">
-              <img src="https://picsum.photos/1000/600/">
-              <div class="carousel-caption">
-                <h4>Welcome</h4>
-                <p>Travel! Enjoy!</p>
-              </div>
-            </div>
-
-            <div class="carousel-item" id="slide3">
-              <img src="https://picsum.photos/1000/600/">
-              <div class="carousel-caption">
-                <h4>Welcome</h4>
-                <p>Travel! Enjoy!</p>
-              </div>
-            </div>
-
-          </div>
-          <p class="carousel-control-prev" href="#slider" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </p>
-          <p class="carousel-control-next" href="#slider" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </p>
-        </div>
+        <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onClosePopup()">Đóng</button>

@@ -95,7 +95,9 @@ export class BookingService {
   }
 
 
-
+  getConsumerHomeCareHistory() {
+    return this.http.get(`${environment.apiUrl}/homecare/consumer/history`);
+  }
   consumerRegistrationHomeCare(homecare: HomeCare) {
     return this.http.post(`${environment.apiUrl}/homecare/consumer/registration`, homecare)
       .pipe(map(res => {

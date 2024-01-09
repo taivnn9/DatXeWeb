@@ -20,29 +20,7 @@ export class HomeCareBookingComponent implements OnInit {
   equipments: Equipment[] = [];
   equipmentsDaily: Equipment[] = [];
   medics: Medic[] = [];
-  imageObject: any[] = [{
-    image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/5.jpg',
-    thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/5.jpg',
-    title: 'Hummingbirds are amazing creatures'
-  }, {
-    image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/9.jpg',
-    thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/9.jpg'
-  }, {
-    image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/4.jpg',
-    thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/4.jpg',
-    title: 'Example with title.'
-  }, {
-    image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/7.jpg',
-    thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/7.jpg',
-    title: 'Hummingbirds are amazing creatures'
-  }, {
-    image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/1.jpg',
-    thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/1.jpg'
-  }, {
-    image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/2.jpg',
-    thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/2.jpg',
-    title: 'Example two with title.'
-  }];
+  imageObject: any[] = [];
 
   selectedEquipments: RentalDetail[] = [];
   selectedEquipmentsDaily: RentalDetail[] = [];
@@ -80,33 +58,30 @@ export class HomeCareBookingComponent implements OnInit {
 
     this.displayValue = selectedValue.equipmentImages
     selectedValue.equipmentImages.forEach(x => {
+      const imageUrl = this.GetImageUrl(x)
       this.imageObject.push({
-        //image: this.GetImageUrl(x)
-        image: this.GetImageUrl(x),
-        thumbImage: this.GetImageUrl(x),
-        title: this.GetImageUrl(x)
+        image: imageUrl,
+        thumbImage: imageUrl,
+        title: imageUrl
       })
       this.imageObject.push({
-        //image: this.GetImageUrl(x)
-        image: this.GetImageUrl(x),
-        thumbImage: this.GetImageUrl(x),
-        title: this.GetImageUrl(x)
+        image: imageUrl,
+        thumbImage: imageUrl,
+        title: imageUrl
       })
       this.imageObject.push({
-        //image: this.GetImageUrl(x)
-        image: this.GetImageUrl(x),
-        thumbImage: this.GetImageUrl(x),
-        title: this.GetImageUrl(x)
+        image: imageUrl,
+        thumbImage: imageUrl,
+        title: imageUrl
       })
       this.imageObject.push({
-        //image: this.GetImageUrl(x)
-        image: this.GetImageUrl(x),
-        thumbImage: this.GetImageUrl(x),
-        title: this.GetImageUrl(x)
+        image: imageUrl,
+        thumbImage: imageUrl,
+        title: imageUrl
       })
     })
 
-    this.displayPopupTile = 'trang thiết bị'
+    this.displayPopupTile = `trang thiết bị ${selectedValue.name}`
 
 
   }
@@ -213,7 +188,7 @@ export class HomeCareBookingComponent implements OnInit {
     }
   }
   ConfimationBooking() {
-    this.bookingService.consumerConfirmation(this.currentBooking).toPromise().then(
+    this.bookingService.consumerConfirmationHomeCare(this.currentBooking).toPromise().then(
       (response: ResponseBody) => {
         this.currentBooking = response.detail;
         this.loading = false

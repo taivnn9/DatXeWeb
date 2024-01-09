@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { Booking, ResponseBody, Account, BookingStatus, BookingType, Address } from '../_models/schemes';
+import { Booking, ResponseBody, Account, BookingStatus, BookingType, Address, HomeCare } from '../_models/schemes';
 import { VehicleService } from '../services/vehicle.service';
 import { BookingService } from '../services/booking.service';
 import { environment } from '../../environments/environment.prod';
@@ -17,6 +17,8 @@ export class MeComponent implements OnInit {
 
 
   bookings: Booking[] = [];
+  homecares: HomeCare[] = [];
+
   booking: Booking = new Booking();
   showSuccess: boolean = false;
 
@@ -37,6 +39,7 @@ export class MeComponent implements OnInit {
 
     this.userProfile();
     this.loadAllBookingHistory()
+    this.loadAllHomeCareHistory()
   }
   
   userProfile() {
@@ -60,6 +63,19 @@ export class MeComponent implements OnInit {
         this.toastr.error(`Lỗi khi lấy danh sách lịch sử chuyến đi`);
       })
   }
+  loadAllHomeCareHistory() {
+    this.bookingService.getConsumerHomeCareHistory().toPromise().then(
+      (response: ResponseBody) => {
+        this.homecares = response.detail;
+        this.homecares.sort((a, b) => a.status - b.status);
+
+      },
+      error => {
+        this.toastr.error(`Lỗi khi lấy danh sách lịch sử chăm sóc tại nhà`);
+      })
+  }
+
+
   onOpenPopup(item: Booking) {
     console.log(item)
   }

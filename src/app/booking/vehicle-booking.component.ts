@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class VehicleBookingComponent implements OnInit {
   loading = false;
   currentBooking: Booking = new Booking();
-
+  imageObject: any[] = [];
   vehicles: Vehicle[];
   equipments: Equipment[];
   medics: Medic[]
@@ -29,12 +29,11 @@ export class VehicleBookingComponent implements OnInit {
   selectedDistrictTo: any = null
   selectedWardTo: any = null
 
-  displayButtonTitle: string = 'Đặt dịch vụ ngay'
+  displayButtonTitle: string = 'Ước tính chi phí'
 
 
   displayPopupValue: string = 'none'
   displayPopupTile: string = 'none'
-  displayValue: any
 
 
   constructor(
@@ -49,15 +48,59 @@ export class VehicleBookingComponent implements OnInit {
     this.DiaGioiHanhChinhVN()
   }
   onOpenPopup(type: string, selectedValue: any) {
-    this.displayPopupValue = 'block'
+    this.imageObject = []
+    
+
     if (type == 'vehicle') {
-      this.displayValue = selectedValue.vehicleImages
-      this.displayPopupTile = 'phương tiện'
+      this.openVehicleImages(selectedValue)
     } else {
-      this.displayValue = selectedValue.equipmentImages
-      this.displayPopupTile = 'trang thiết bị'
+      this.openEquipmentImages(selectedValue)
     }
 
+    this.displayPopupValue = 'block'
+  }
+  openVehicleImages(vehicle: Vehicle) {
+    vehicle.vehicleImages.forEach(x => {
+      const imageUrl = this.GetImageUrl(x)
+      this.imageObject.push({
+        image: imageUrl,
+        thumbImage: imageUrl,
+        title: imageUrl
+      })
+    })
+    this.displayPopupTile = `phương tiện ${vehicle.name}`
+  }
+
+  openEquipmentImages(equipment: Equipment) {
+    equipment.equipmentImages.forEach(x => {
+      const imageUrl = this.GetImageUrl(x)
+      this.imageObject.push({
+        image: imageUrl,
+        thumbImage: imageUrl,
+        title: imageUrl
+      })
+      this.imageObject.push({
+        image: imageUrl,
+        thumbImage: imageUrl,
+        title: imageUrl
+      })
+      this.imageObject.push({
+        image: imageUrl,
+        thumbImage: imageUrl,
+        title: imageUrl
+      })
+      this.imageObject.push({
+        image: imageUrl,
+        thumbImage: imageUrl,
+        title: imageUrl
+      })
+      this.imageObject.push({
+        image: imageUrl,
+        thumbImage: imageUrl,
+        title: imageUrl
+      })
+    })
+    this.displayPopupTile = `trang thiết bị ${equipment.name}`
   }
   onClosePopup() {
     this.displayPopupValue = 'none'

@@ -10,23 +10,22 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 p-lg-0">
-        <!--<ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
+        <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
           <li class="nav-item mx-2">
-            <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+            <a *ngIf="user" [routerLink]="['/profile']" class="nav-link active" aria-current="page">Quản lý cá nhân</a>
           </li>
-          <li class="nav-item mx-2">
+          <!--<li class="nav-item mx-2">
             <a class="nav-link" href="#">Bảng giá</a>
           </li>
           <li class="nav-item mx-2">
             <a class="nav-link" href="#">Liên hệ</a>
-          </li>
-        </ul>-->
-        <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
-
-          <!--<a [routerLink]="['/login']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #DFA31E;" *ngIf="!user">Đặt dịch vụ ngay</a>-->
-          <!--<a [routerLink]="['/register']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #000000">Trở thành tài xế</a>-->
-        </div>
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu" *ngIf="user">
+          </li>-->
+        </ul>
+        <!--<div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
+          <a *ngIf="user" [routerLink]="['/profile']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #DFA31E;">Cá nhân</a>
+          <a [routerLink]="['/register']" class="text-white text-decoration-none px-4 py-2 rounded-3" style="background-color: #000000">Trở thành tài xế</a>
+        </div>-->
+        <!--<ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu" *ngIf="user">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <div class="profile-pic">
@@ -38,7 +37,19 @@
               <li><button class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</button></li>
             </ul>
           </li>
-        </ul>
+        </ul>--><!--<ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu" *ngIf="user">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="profile-pic">
+                <img src="https://source.unsplash.com/250x250?girl" alt="Profile Picture">
+              </div>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" [routerLink]="['/profile']"><i class="fas fa-sliders-h fa-fw"></i> Thông tin tài khoản</a></li>
+              <li><button class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</button></li>
+            </ul>
+          </li>
+        </ul>-->
       </div>
     </div>
   </div>

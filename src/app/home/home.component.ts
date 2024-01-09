@@ -10,26 +10,23 @@ import { Router } from '@angular/router';
   providers: [AuthService]
 })
 export class HomeComponent implements OnInit {
-  user: any = localStorage.getItem("currentUser");
+  user: string = null;
   constructor(
     private authService: AuthService,
     private toastr: ToastrService,
     private router: Router
-  ) { }
+  ) {
+    this.user = this.authService.getToken()
+  }
 
   ngOnInit() {
+    
   }
   logout() {
-    this.authService.logout().subscribe(
-      (response) => {
-        localStorage.removeItem('currentUser');
-        this.user = null;
-        this.router.navigate(['/'])
-      },
-      (error) => {
-        this.toastr.error('Có lỗi xảy ra khi tải dữ liệu', 'Lỗi');
-      }
-    );
+    this.authService.removeToken();
+    this.user = null;
+    this.toastr.success('Đăng xuất thành công');
+    location.reload()
   }
   login() {
     this.router.navigate(['/login'])

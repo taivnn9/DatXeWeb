@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
   selectedFileUrl10: string | ArrayBuffer | null = null;
   selectedFileUrl11: string | ArrayBuffer | null = null;
   selectedFileUrl12: string | ArrayBuffer | null = null;
-  user : any = localStorage.getItem("currentUser");
+  //user : any = localStorage.getItem("currentUser");
   arrImages: string[] = [];
   photos: string[] = [];
   nationalImageIds: String[] = [];

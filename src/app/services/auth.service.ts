@@ -8,14 +8,21 @@ import { any } from 'codelyzer/util/function';
 export class AuthService {
   constructor(private http: HttpClient) { }
 
+  getToken() {
+    return localStorage.getItem("currentUser");
+  }
+  setToken(token: string) {
+    localStorage.setItem('currentUser', token);
+  }
+  removeToken() {
+    localStorage.removeItem('currentUser')
+  }
   login(user: any) {
     return this.http.post<any>(`${environment.apiUrl}/login`, { "phoneNumber": user.phoneNumber, "secret": user.secret, "otp": user.otp})
       .pipe(map(res => {
-        console.log(res.detail);
+
         if (res && res.detail) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', res.detail);
-          // this.currentUserSubject.next(res);
+          this.setToken(res.detail)
         }
 
         return res;
@@ -23,20 +30,7 @@ export class AuthService {
   }
 
   logout() {
-    const token: any = localStorage.getItem("currentUser");
-    console.log(token);
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + token,
-      'Content-Type': 'application/json'
-    });
-
-    const options = {
-      headers: headers
-    };
-    return this.http.post(`${environment.apiUrl}/logout`, {}, options)
-      .pipe(map(res => {
-        return res;
-      }));
+    this.removeToken();
   }
 
   getOtp(user: any) {
@@ -60,8 +54,6 @@ export class AuthService {
       }));
   }
 
-  public get currentAccountValue(): any {
-    return localStorage.getItem("currentUser");
-  }
+
 
 }

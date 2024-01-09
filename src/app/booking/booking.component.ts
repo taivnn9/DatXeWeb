@@ -21,7 +21,7 @@ export class BookingComponent implements OnInit {
     private bookingService: BookingService,
     private toastr: ToastrService
   ) {
-    this.activeTab = router.url.includes('vehicle-booking') ? 'vehicle-booking' : 'homecare-booking'
+    this.activeTab = router.url.includes('homecare-booking') ? 'homecare-booking' : 'vehicle-booking'
   }
 
   ngOnInit() {

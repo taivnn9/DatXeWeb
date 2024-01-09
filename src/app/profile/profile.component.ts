@@ -29,17 +29,11 @@ export class ProfileComponent implements OnInit {
     this.userProfile();
     this.driverProfile();
   }
+
   logout() {
-    this.authService.logout().subscribe(
-      (response) => {
-        localStorage.removeItem('currentUser');
-        this.user = null;
-        this.router.navigate(['/']);
-      },
-      (error) => {
-        this.toastr.error('Có lỗi xảy ra. Vui lòng thử la sau!', 'Lỗi');
-      }
-    );
+    this.authService.removeToken()
+    this.toastr.success('Đăng xuất thành công');
+    location.reload()
   }
 
   driverProfile() {
