@@ -2,14 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import {environment} from '../../environments/environment';
-import { any } from 'codelyzer/util/function';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   constructor(private http: HttpClient) { }
 
   getToken() {
-    return localStorage.getItem("currentUser");
+    const token = localStorage.getItem("currentUser");
+    let helper = new JwtHelperService()
+    if (token == null || helper.isTokenExpired(token)) {
+      return null 
+    } else {
+      return token
+    }
+    
   }
   setToken(token: string) {
     localStorage.setItem('currentUser', token);
