@@ -58,7 +58,7 @@
 
                 </td>
 
-                <td>{{booking.cost}}</td>
+                <td>{{booking.cost | currency:'VND'}}</td>
 
                 <td>
                   <span class="badge bg-success">{{GetStatusText(booking.status)}}</span>
@@ -96,7 +96,7 @@
 
                 </td>
 
-                <td>{{booking.cost}}</td>
+                <td>{{booking.cost | currency:'VND'}}</td>
 
                 <td>
                   <span class="badge bg-success">{{GetStatusText(booking.status)}}</span>
