@@ -100,7 +100,7 @@ export class VehicleBookingComponent implements OnInit {
   getAllEquipmentAvailable() {
     this.bookingService.getAllEquipmentAvailable().toPromise().then(
       (response: ResponseBody) => {
-        this.equipments = response.detail;
+        this.equipments = response.detail.filter(x => x.unit == 'Theo xe');
         //this.historyBookings.sort((a, b) => a.status - b.status);
         //this.listBookingInTrip = this.historyBookings.filter(obj => obj.status == BookingStatus.ProviderConfirmation || obj.status == BookingStatus.ProviderOnWay || obj.status == BookingStatus.ProviderAreServing);
       },
@@ -111,7 +111,7 @@ export class VehicleBookingComponent implements OnInit {
   getAllMedicAvailable() {
     this.bookingService.getAllMedicAvailable().toPromise().then(
       (response: ResponseBody) => {
-        this.medics = response.detail;
+        this.medics = response.detail.filter(x => x.unit == 'Theo xe');
         //this.historyBookings.sort((a, b) => a.status - b.status);
         //this.listBookingInTrip = this.historyBookings.filter(obj => obj.status == BookingStatus.ProviderConfirmation || obj.status == BookingStatus.ProviderOnWay || obj.status == BookingStatus.ProviderAreServing);
       },

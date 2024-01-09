@@ -7,12 +7,12 @@
 
     <div class="row">
       <div class="col-sm-12">
-        <b>Điểm đón (*)</b>
+        <b>Địa chỉ gia đình (*)</b>
       </div>
       <div class="col-sm-4">
         <div class="form-group">
           <span class="form-label">Tỉnh/ thành phố</span>
-          <select class="form-control" (change)="onChange('from')" [(ngModel)]="selectedCityFrom" name="selectedCityFrom">
+          <select class="form-control" (change)="onChange()" [(ngModel)]="selectedCity" name="selectedCity">
             <option *ngFor="let item of diaGioiHanhChinhVN" [ngValue]="item">
               {{item.Name}}
             </option>
@@ -22,8 +22,8 @@
       <div class="col-sm-4">
         <div class="form-group">
           <span class="form-label">Quận/ huyện</span>
-          <select class="form-control" [(ngModel)]="selectedDistrictFrom" name="selectedDistrictFrom">
-            <option *ngFor="let item of selectedCityFrom?.Districts" [ngValue]="item">
+          <select class="form-control" [(ngModel)]="selectedDistrict" name="selectedDistrict">
+            <option *ngFor="let item of selectedCity?.Districts" [ngValue]="item">
               {{item.Name}}
             </option>
           </select>
@@ -32,60 +32,30 @@
       <div class="col-sm-4">
         <div class="form-group">
           <span class="form-label">Xã phường</span>
-          <select class="form-control" [(ngModel)]="selectedWardFrom" name="selectedWardFrom">
-            <option *ngFor="let item of selectedDistrictFrom?.Wards" [ngValue]="item">
+          <select class="form-control" [(ngModel)]="selectedWard" name="selectedWard">
+            <option *ngFor="let item of selectedDistrict?.Wards" [ngValue]="item">
               {{item.Name}}
             </option>
           </select>
         </div>
       </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <span class="form-label">Số nhà, tên đường</span>
+          <input class="form-control" name="selectedStreet" type="text" [(ngModel)]="selectedStreet">
+        </div>
+      </div>
+
     </div>
 
-    <br />
-    <div class="row">
-      <div class="col-sm-12">
-        <b>Điểm đến (*)</b>
-      </div>
-      <div class="col-sm-4">
-        <div class="form-group">
-          <span class="form-label">Tỉnh/ thành phố</span>
-          <select class="form-control" (change)="onChange('to')" [(ngModel)]="selectedCityTo" name="selectedCityTo">
-            <option *ngFor="let item of diaGioiHanhChinhVN" [ngValue]="item">
-              {{item.Name}}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="form-group">
-          <span class="form-label">Quận/ huyện</span>
-          <select class="form-control" [(ngModel)]="selectedDistrictTo" name="selectedDistrictTo">
-            <option *ngFor="let item of selectedCityTo?.Districts" [ngValue]="item">
-              {{item.Name}}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="form-group">
-          <span class="form-label">Xã phường</span>
-          <select class="form-control" [(ngModel)]="selectedWardTo" name="selectedWardTo">
-            <option *ngFor="let item of selectedDistrictTo?.Wards" [ngValue]="item">
-              {{item.Name}}
-            </option>
-          </select>
-        </div>
-      </div>
-    </div>
     <br />
 
 
     <div class="row">
-
-      <div class="col-sm-4">
+      <div class="col-sm-6">
         <div class="form-group">
-          <b class="form-label">Ngày đặt xe (*)</b>
-          <input class="form-control" min="2024-01-07" name="getYesterdayDate()" type="date" required [(ngModel)]="currentBooking.startTime">
+          <b class="form-label">Ngày đặt (*)</b>
+          <input class="form-control" min="getYesterdayDate()" name="currentBookingStartTime" type="date" required [(ngModel)]="currentBooking.startTime">
         </div>
       </div>
     </div>
@@ -95,26 +65,51 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <!--<span class="form-label">Xe</span>-->
           <div class="card-body table-responsive p-0" style="min-height: 100px;">
             <table class="table table-head-fixed">
               <thead>
                 <tr>
-                  <th colspan="4">Lựa chọn phương tiện (*)</th>
+                  <th colspan="2">Trang thiết bị (thuê theo ngày)</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of vehicles">
-                  <td>
-                    Loại xe: {{item.name}}
-                  </td>
-                  <td>Đời xe: {{item.year}}</td>
-                  <td>Đơn giá: {{item.cost}} VNĐ</td>
-                  <td>
-                    <p class="p_link" (click)="onOpenPopup('vehicle', item)">Chi tiết</p>
-                  </td>
-                  <td>
-                    <input name="options" ng-control="options" type="radio" [value]="item.id" [(ngModel)]="currentBooking.carId"><br />
+                <tr *ngFor="let item of equipmentsDaily; index as i">
+                  <td class="row">
+
+                    <div class="col-2">
+                      <img src="{{GetFirstImage(item.equipmentImages)}}" alt="">
+                    </div>
+                    <div class="col-10 row">
+                      <div class="col-12 row">
+                        <b class="col-9">{{item.name}}</b>
+                        <p class="col-3 p_link" (click)="onOpenPopup('equipment', item)">Chi tiết</p>
+                      </div>
+
+                      <input class="col-12 form-control" type="text" name="selectedEquipmentsDailyNote{{i}}" [(ngModel)]="selectedEquipmentsDaily[i].note" placeholder="Ghi chú">
+                      <div class="col-12 row ">
+                        <div class="col-9">
+                          <p>{{item.cost}} VNĐ/{{item.unit}}</p>
+                        </div>
+
+
+                        <div class="col-1">
+                          <button class="nopadding form-control" (click)="selectedEquipmentsDaily[i].count == 0 ? 0 : selectedEquipmentsDaily[i].count = selectedEquipmentsDaily[i].count - 1">
+                            -
+                          </button>
+                        </div>
+                        <div class="col-1">
+                          <b>{{selectedEquipmentsDaily[i].count}}</b>
+
+                        </div>
+                        <div class="col-1">
+                          <button class="nopadding form-control" (click)="selectedEquipmentsDaily[i].count= selectedEquipmentsDaily[i].count + 1">
+                            +
+                          </button>
+                        </div>
+
+                      </div>
+
+                    </div>
                   </td>
                 </tr>
 
@@ -125,26 +120,51 @@
         </div>
 
       </div>
+      <br />
       <div class="col-sm-6">
         <div class="form-group">
-          <!--<span class="form-label">Trang thiết bị</span>-->
           <div class="card-body table-responsive p-0" style="min-height: 100px;">
             <table class="table table-head-fixed">
               <thead>
                 <tr>
-                  <th colspan="4">Lựa chọn trang thiết bị</th>
+                  <th colspan="3">Trang thiết bị/ thuốc (mua)</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of equipments">
-                  <td>{{item.name}}</td>
-                  <td>{{item.unit}}</td>
-                  <td>{{item.cost}} VNĐ</td>
-                  <td>
-                    <p class="p_link" (click)="onOpenPopup('equipment', item)">Chi tiết</p>
-                  </td>
-                  <td>
-                    <input type="checkbox" (change)="ClickItemAction($event, 'equipmentIds', item.id)">
+
+                <tr *ngFor="let item of equipments; index as i">
+
+                  <td class="row">
+                    <div class="col-2">
+                      <img src="{{GetFirstImage(item.equipmentImages)}}" alt="">
+                    </div>
+                    <div class="col-10 row">
+                      <div class="col-12 row">
+                        <b class="col-9">{{item.name}}</b>
+                        <p class="col-3 p_link" (click)="onOpenPopup('equipment', item)">Chi tiết</p>
+                      </div>
+
+                      <input class="col-12 form-control" type="text" name="selectedEquipmentsNote{{i}}" [(ngModel)]="selectedEquipments[i].note" placeholder="Ghi chú">
+                      <div class="col-12 row ">
+                        <div class="col-9">
+                          <p>{{item.cost}} VNĐ/{{item.unit}}</p>
+                        </div>
+
+
+                        <div class="col-1">
+                          <button class="nopadding form-control" (click)="selectedEquipments[i].count == 0 ? 0 : selectedEquipments[i].count = selectedEquipments[i].count - 1">-</button>
+                        </div>
+                        <div class="col-1">
+                          <!--<input class=" form-control" name="selectedEquipmentsCount{{i}}" type="text" disabled [ngModel]="selectedEquipments[i].count">-->
+                          <b>{{selectedEquipments[i].count}}</b>
+                        </div>
+                        <div class="col-1">
+                          <button class="nopadding form-control" (click)="selectedEquipments[i].count= selectedEquipments[i].count + 1">+</button>
+                        </div>
+
+                      </div>
+
+                    </div>
                   </td>
                 </tr>
 
@@ -155,25 +175,47 @@
         </div>
       </div>
     </div>
+
+    <br />
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <!--<span class="form-label">Trang thiết bị</span>-->
           <div class="card-body table-responsive p-0" style="min-height: 100px;">
             <table class="table table-head-fixed">
               <thead>
                 <tr>
-                  <th colspan="4">Lựa chọn Nhân viên y tế</th>
+                  <th>Nhân viên y tế (lần khám)</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of medics">
-                  <td>{{item.name}}</td>
-                  <td>{{item.unit}}</td>
-                  <td>{{item.cost}} VNĐ</td>
-                  <td>
-                    <input type="checkbox" (change)="ClickItemAction($event, 'medicIds', item.id)">
+                <tr *ngFor="let item of medics; index as i">
+
+                  <td class="row">
+                    <div class="col-12 row">
+                      <b class="col-9">{{item.name}}</b>
+                    </div>
+
+                    <input class="col-12 form-control" type="text" name="selectedMedicsNote{{i}}" [(ngModel)]="selectedMedics[i].note" placeholder="Ghi chú">
+                    <div class="col-12 row ">
+                      <div class="col-9">
+                        <p>{{item.cost}} VNĐ/{{item.unit}}</p>
+                      </div>
+
+
+                      <div class="col-1">
+                        <button class="nopadding form-control" (click)="selectedMedics[i].count == 0 ? 0 : selectedMedics[i].count = selectedMedics[i].count - 1">-</button>
+                      </div>
+                      <div class="col-1">
+                        <!--<input class="nopadding form-control" name="selectedMedicsCount{{i}}" type="text" disabled [ngModel]="selectedMedics[i].count">-->
+                        <b>{{selectedMedics[i].count}}</b>
+                      </div>
+                      <div class="col-1">
+                        <button class="nopadding form-control" (click)="selectedMedics[i].count= selectedMedics[i].count + 1">+</button>
+                      </div>
+
+                    </div>
                   </td>
+
                 </tr>
 
               </tbody>
@@ -226,12 +268,13 @@
       <div class="modal-header">
         <b class="modal-title" id="exampleModalLabel">Hình ảnh {{displayPopupTile}}</b>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onClosePopup()">
-          
+
 
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+
         <!--<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active" *ngFor="let imageId of displayValue">
@@ -239,50 +282,7 @@
             </div>
           </div>
         </div>-->
-
-
-        <div class="carousel slide" id="slider" data-ride="carousel">
-          <!--indicators-->
-          <ol class="carousel-indicators">
-            <li data-target="#slider" data-slide-to="0" class="active"></li>
-            <li data-target="#slider" data-slide-to="1"></li>
-            <li data-target="#slider" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="https://picsum.photos/1000/600/">
-              <div class="carousel-caption">
-                <h4>Welcome</h4>
-                <p>Travel! Enjoy!</p>
-              </div>
-            </div>
-
-            <div class="carousel-item" id="slide2">
-              <img src="https://picsum.photos/1000/600/">
-              <div class="carousel-caption">
-                <h4>Welcome</h4>
-                <p>Travel! Enjoy!</p>
-              </div>
-            </div>
-
-            <div class="carousel-item" id="slide3">
-              <img src="https://picsum.photos/1000/600/">
-              <div class="carousel-caption">
-                <h4>Welcome</h4>
-                <p>Travel! Enjoy!</p>
-              </div>
-            </div>
-
-          </div>
-          <p class="carousel-control-prev" href="#slider" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </p>
-          <p class="carousel-control-next" href="#slider" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </p>
-        </div>
+        <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onClosePopup()">Đóng</button>

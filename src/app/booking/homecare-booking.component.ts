@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Booking, BookingType, BookingStatus, Address, Vehicle, Equipment, Medic, ResponseBody, TinhThanh, PhuongXa, QuanHuyen } from '../_models/schemes';
+import { Booking, BookingType, BookingStatus, Address, Vehicle, Equipment, Medic, ResponseBody, TinhThanh, PhuongXa, QuanHuyen, HomeCare, RentalDetail, Image } from '../_models/schemes';
 
 import { ToastrService } from 'ngx-toastr';
 //import { environment } from '@environments/environment';
@@ -9,27 +9,52 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homecare-booking',
-  templateUrl: './homecare-booking.component.html'
+  templateUrl: './homecare-booking.component.html',
+  styleUrls: ['./homecare-booking.component.css']
 })
 export class HomeCareBookingComponent implements OnInit {
   loading = false;
-  currentBooking: Booking = new Booking();
+  currentBooking: HomeCare = new HomeCare();
 
-  vehicles: Vehicle[];
-  equipments: Equipment[];
-  medics: Medic[]
+  diaGioiHanhChinhVN: any = [];
+  equipments: Equipment[] = [];
+  equipmentsDaily: Equipment[] = [];
+  medics: Medic[] = [];
+  imageObject: any[] = [{
+    image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/5.jpg',
+    thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/5.jpg',
+    title: 'Hummingbirds are amazing creatures'
+  }, {
+    image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/9.jpg',
+    thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/9.jpg'
+  }, {
+    image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/4.jpg',
+    thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/4.jpg',
+    title: 'Example with title.'
+  }, {
+    image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/7.jpg',
+    thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/7.jpg',
+    title: 'Hummingbirds are amazing creatures'
+  }, {
+    image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/1.jpg',
+    thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/1.jpg'
+  }, {
+    image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/2.jpg',
+    thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/2.jpg',
+    title: 'Example two with title.'
+  }];
 
-  diaGioiHanhChinhVN: any
+  selectedEquipments: RentalDetail[] = [];
+  selectedEquipmentsDaily: RentalDetail[] = [];
+  selectedMedics: RentalDetail[] = [];
 
-  selectedCityFrom: any = null
-  selectedDistrictFrom: any = null
-  selectedWardFrom: any = null
+  selectedCity: any = null
+  selectedDistrict: any = null
+  selectedWard: any = null
+  selectedStreet: string = null
 
-  selectedCityTo: any = null
-  selectedDistrictTo: any = null
-  selectedWardTo: any = null
 
-  displayButtonTitle: string = 'Đặt dịch vụ ngay'
+  displayButtonTitle: string = 'Ước tính chi phí'
 
 
   displayPopupValue: string = 'none'
@@ -43,26 +68,58 @@ export class HomeCareBookingComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.getAllVehicleAvailable()
     this.getAllEquipmentAvailable()
     this.getAllMedicAvailable()
     this.DiaGioiHanhChinhVN()
   }
-  onOpenPopup(type: string, selectedValue: any) {
+  onOpenPopup(type: string, selectedValue: Equipment) {
+
+
     this.displayPopupValue = 'block'
-    if (type == 'vehicle') {
-      this.displayValue = selectedValue.vehicleImages
-      this.displayPopupTile = 'phương tiện'
-    } else {
-      this.displayValue = selectedValue.equipmentImages
-      this.displayPopupTile = 'trang thiết bị'
-    }
+    this.imageObject = []
+
+    this.displayValue = selectedValue.equipmentImages
+    selectedValue.equipmentImages.forEach(x => {
+      this.imageObject.push({
+        //image: this.GetImageUrl(x)
+        image: this.GetImageUrl(x),
+        thumbImage: this.GetImageUrl(x),
+        title: this.GetImageUrl(x)
+      })
+      this.imageObject.push({
+        //image: this.GetImageUrl(x)
+        image: this.GetImageUrl(x),
+        thumbImage: this.GetImageUrl(x),
+        title: this.GetImageUrl(x)
+      })
+      this.imageObject.push({
+        //image: this.GetImageUrl(x)
+        image: this.GetImageUrl(x),
+        thumbImage: this.GetImageUrl(x),
+        title: this.GetImageUrl(x)
+      })
+      this.imageObject.push({
+        //image: this.GetImageUrl(x)
+        image: this.GetImageUrl(x),
+        thumbImage: this.GetImageUrl(x),
+        title: this.GetImageUrl(x)
+      })
+    })
+
+    this.displayPopupTile = 'trang thiết bị'
+
 
   }
   onClosePopup() {
     this.displayPopupValue = 'none'
   }
-
+  GetFirstImage(arr: string[]) {
+    if (arr.length > 0) {
+      return this.GetImageUrl(arr[0])
+    } else {
+      return "https://source.unsplash.com/250x250?girl"
+    }
+  }
   GetImageUrl(imageId: string) {
     return `${environment.apiUrl}/image/${imageId}`
   }
@@ -72,37 +129,32 @@ export class HomeCareBookingComponent implements OnInit {
         this.diaGioiHanhChinhVN = response;
       })
   }
-  onChange(type: string) {
-    if (type == 'from') {
+  onChange() {
 
-      console.log(this.selectedCityFrom)
-      this.selectedDistrictFrom = null
-      this.selectedWardFrom = null
-    } else {
+    console.log(this.selectedCity)
+    this.selectedDistrict = null
+    this.selectedWard = null
 
-      console.log(this.selectedCityTo)
-      this.selectedDistrictTo = null
-      this.selectedWardTo = null
-    }
   }
 
-  getAllVehicleAvailable() {
-    this.bookingService.getAllVehicleAvailable().toPromise().then(
-      (response: ResponseBody) => {
-        this.vehicles = response.detail;
-        //this.historyBookings.sort((a, b) => a.status - b.status);
-        //this.listBookingInTrip = this.historyBookings.filter(obj => obj.status == BookingStatus.ProviderConfirmation || obj.status == BookingStatus.ProviderOnWay || obj.status == BookingStatus.ProviderAreServing);
-      },
-      error => {
-        this.toastr.error(`Lỗi khi lấy danh sách phương tiện`);
-      })
-  }
   getAllEquipmentAvailable() {
     this.bookingService.getAllEquipmentAvailable().toPromise().then(
       (response: ResponseBody) => {
-        this.equipments = response.detail;
-        //this.historyBookings.sort((a, b) => a.status - b.status);
-        //this.listBookingInTrip = this.historyBookings.filter(obj => obj.status == BookingStatus.ProviderConfirmation || obj.status == BookingStatus.ProviderOnWay || obj.status == BookingStatus.ProviderAreServing);
+        const all = response.detail;
+        this.equipmentsDaily = all.filter(x => x.unit == 'Theo ngày')
+        this.equipmentsDaily.forEach(x => {
+          this.selectedEquipmentsDaily.push(
+            new RentalDetail(x.id)
+          )
+        })
+
+        this.equipments = all.filter(x => x.unit != 'Theo ngày' && x.unit != 'Theo xe')
+        this.equipments.forEach(x => {
+          this.selectedEquipments.push(
+            new RentalDetail(x.id)
+          )
+        })
+
       },
       error => {
         this.toastr.error(`Lỗi khi lấy danh sách thiết bị`);
@@ -111,36 +163,18 @@ export class HomeCareBookingComponent implements OnInit {
   getAllMedicAvailable() {
     this.bookingService.getAllMedicAvailable().toPromise().then(
       (response: ResponseBody) => {
-        this.medics = response.detail;
-        //this.historyBookings.sort((a, b) => a.status - b.status);
-        //this.listBookingInTrip = this.historyBookings.filter(obj => obj.status == BookingStatus.ProviderConfirmation || obj.status == BookingStatus.ProviderOnWay || obj.status == BookingStatus.ProviderAreServing);
+        this.medics = response.detail.filter(x => x.unit != 'Theo xe');
+        this.medics.forEach(x => {
+          this.selectedMedics.push(
+            new RentalDetail(x.id)
+          )
+        })
       },
       error => {
         this.toastr.error(`Lỗi khi lấy danh sách nhân viên y tế`);
       })
   }
 
-  //onChange(id: string, source: string, field: string) {
-
-  //  if (field == 'state') {
-  //    this.currentBooking[source][field] = this.diaGioiHanhChinhVN.find(x => x.Id == id).Name
-
-
-  //  } else if (field == 'city') {
-
-  //    this.currentBooking[source][field] = this.quanHuyenMap.get(source).find(x => x.MA_QUAN == id).TEN_QUAN
-  //    // update Quan Huyen map
-  //    this.bookingService.LoadDMPhuongXa(id).toPromise().then(
-  //      (response: any) => {
-  //        this.phuongXaMap.set(source, response)
-  //      },
-  //      error => {
-  //        this.toastr.error(`Lỗi khi lấy danh sách phường xã theo quận huyện ${id}`);
-  //      })
-  //  } else if (field == 'street') {
-  //    this.currentBooking[source][field] = this.phuongXaMap.get(source).find(x => x.MA_XA == id).TEN_DAY_DU
-  //  }
-  //}
   GetTypeList() {
     let map = this.bookingService.enumToMap(BookingType);
     return map
@@ -151,10 +185,6 @@ export class HomeCareBookingComponent implements OnInit {
   }
   GetStatusText(value: number) {
     return BookingStatus[value];
-  }
-
-  GetItemsFromMap(mapName) {
-
   }
 
   ClickItemAction(event: any, field: string, id: string,) {
@@ -200,21 +230,21 @@ export class HomeCareBookingComponent implements OnInit {
     console.log(this.currentBooking)
     let exceptions = []
 
-    if (this.selectedCityFrom == null || this.selectedCityTo == null) {
+    if (this.selectedCity == null) {
       exceptions.push("Tỉnh/thành phố đang để trống")
     }
-    if (this.selectedDistrictFrom == null || this.selectedDistrictTo == null) {
+    if (this.selectedDistrict == null) {
       exceptions.push("Quận/huyện đang để trống")
     }
-    if (this.selectedWardFrom == null || this.selectedWardTo == null) {
+    if (this.selectedWard == null) {
       exceptions.push("Xã/phường đang để trống")
     }
-
-    if (this.currentBooking.carId == "") {
-      exceptions.push("Loại phương tiện đang để trống")
+    if (this.selectedStreet == null) {
+      exceptions.push("Số nhà/tên đường đang để trống")
     }
+
     if (this.currentBooking.startTime == "") {
-      exceptions.push("Ngày đặt xe đang để trống")
+      exceptions.push("Ngày đặt đang để trống")
     }
 
     if (exceptions.length > 0) {
@@ -224,18 +254,16 @@ export class HomeCareBookingComponent implements OnInit {
       })
       this.loading = false
     } else {
-      this.currentBooking.fromLocation.city = this.selectedCityFrom.Name
-      this.currentBooking.fromLocation.district = this.selectedDistrictFrom.Name
-      this.currentBooking.fromLocation.ward = this.selectedWardFrom.Name
+      this.currentBooking.location.city = this.selectedCity.Name
+      this.currentBooking.location.district = this.selectedDistrict.Name
+      this.currentBooking.location.ward = this.selectedWard.Name
+      this.currentBooking.location.street = this.selectedStreet
 
-      this.currentBooking.toLocation.city = this.selectedCityTo.Name
-      this.currentBooking.toLocation.district = this.selectedDistrictTo.Name
-      this.currentBooking.toLocation.ward = this.selectedWardTo.Name
+      this.currentBooking.dailyEquipmentIds = this.selectedEquipmentsDaily.filter(x => x.count > 0)
+      this.currentBooking.equipmentIds = this.selectedEquipments.filter(x => x.count > 0)
+      this.currentBooking.dailyMedicIds = this.selectedMedics.filter(x => x.count > 0)
 
-      this.currentBooking.endTime = "2025-11-11"
-
-
-      this.bookingService.consumerRegistration(this.currentBooking).toPromise().then(
+      this.bookingService.consumerRegistrationHomeCare(this.currentBooking).toPromise().then(
         (response: ResponseBody) => {
           this.currentBooking = response.detail;
           this.loading = false
@@ -262,14 +290,4 @@ export class HomeCareBookingComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
 
-  isActiveTab: string = 'Paris'
-
-  openCity(id: string) {
-    this.isActiveTab = id
-    console.log(this.isActiveTab)
-  }
-
-  getStyle(id: string) {
-    'display:' + ( this.isActiveTab === id ? 'block' : 'none')
-  }
 }

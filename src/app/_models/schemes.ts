@@ -208,18 +208,20 @@ export class PhuongXa {
 }
 export class HomeCare {
   id: string;
-  location: Location;
-  startTime: string;
-  consumerId: string;
-  DailyEquipmentIds: RentalDetail[];
-  DailyMedicIds: RentalDetail[];
-  EquipmentIds: RentalDetail[];
-  note: string;
-  cost: number;
-  status: number;
+  location: Address = new Address();
+  startTime: string = '';
+  consumerId: string = '';
+  dailyEquipmentIds: RentalDetail[] = [];
+  dailyMedicIds: RentalDetail[] = [];
+  equipmentIds: RentalDetail[] = [];
+  note: string = '';
+  cost: number = 0;
+  status: number = 0;
 }
 export class RentalDetail {
-  id: string;
-  Count: number;
-  Note: string;
+  id: string = '';
+  count: number = 0;
+  note: string = '';
+
+  constructor(_id: string) { this.id = _id }
 }

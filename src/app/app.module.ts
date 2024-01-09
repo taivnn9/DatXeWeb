@@ -17,6 +17,7 @@ import { Interceptor } from './interceptor';
 import { MeComponent } from './profile/me.component';
 import { VehicleBookingComponent } from './booking/vehicle-booking.component';
 import { HomeCareBookingComponent } from './booking/homecare-booking.component';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { HomeCareBookingComponent } from './booking/homecare-booking.component';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgImageSliderModule,
     ToastrModule.forRoot()
   ],
   providers: [

@@ -14,13 +14,15 @@ import { Router } from '@angular/router';
 })
 export class BookingComponent implements OnInit {
   loading = false;
-  activeTab: string = 'vehicle-booking'
+  activeTab: string = ''
 
   constructor(
     private router: Router,
     private bookingService: BookingService,
     private toastr: ToastrService
-  ) { }
+  ) {
+    this.activeTab = router.url.includes('vehicle-booking') ? 'vehicle-booking' : 'homecare-booking'
+  }
 
   ngOnInit() {
   }

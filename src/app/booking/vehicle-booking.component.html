@@ -132,13 +132,13 @@
             <table class="table table-head-fixed">
               <thead>
                 <tr>
-                  <th colspan="4">Lựa chọn trang thiết bị</th>
+                  <th colspan="3">Trang thiết bị (theo xe)</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let item of equipments">
                   <td>{{item.name}}</td>
-                  <td>{{item.unit}}</td>
+                  <!--<td></td>-->
                   <td>{{item.cost}} VNĐ</td>
                   <td>
                     <p class="p_link" (click)="onOpenPopup('equipment', item)">Chi tiết</p>
@@ -163,13 +163,13 @@
             <table class="table table-head-fixed">
               <thead>
                 <tr>
-                  <th colspan="4">Lựa chọn Nhân viên y tế</th>
+                  <th colspan="3">Nhân viên y tế (Theo xe)</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let item of medics">
                   <td>{{item.name}}</td>
-                  <td>{{item.unit}}</td>
+                  <!--<td>{{item.unit}}</td>-->
                   <td>{{item.cost}} VNĐ</td>
                   <td>
                     <input type="checkbox" (change)="ClickItemAction($event, 'medicIds', item.id)">
