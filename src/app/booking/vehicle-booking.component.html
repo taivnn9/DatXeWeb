@@ -85,7 +85,7 @@
       <div class="col-sm-4">
         <div class="form-group">
           <b class="form-label">Ngày đặt xe (*)</b>
-          <input class="form-control" min="2024-01-07" name="getYesterdayDate()" type="date" required [(ngModel)]="currentBooking.startTime">
+          <input class="form-control" min="2024-01-07" name="currentBookingStartTime" type="date" required [(ngModel)]="currentBooking.startTime">
         </div>
       </div>
     </div>
@@ -109,7 +109,7 @@
                     Loại xe: {{item.name}}
                   </td>
                   <td>Đời xe: {{item.year}}</td>
-                  <td>Đơn giá: {{item.cost}} VNĐ</td>
+                  <td>Đơn giá: {{item.cost | currency:'VND'}} VNĐ</td>
                   <td>
                     <p class="p_link" (click)="onOpenPopup('vehicle', item)">Chi tiết</p>
                   </td>
@@ -139,7 +139,7 @@
                 <tr *ngFor="let item of equipments">
                   <td>{{item.name}}</td>
                   <!--<td></td>-->
-                  <td>{{item.cost}} VNĐ</td>
+                  <td>{{item.cost | currency:'VND'}}</td>
                   <td>
                     <p class="p_link" (click)="onOpenPopup('equipment', item)">Chi tiết</p>
                   </td>
@@ -170,7 +170,7 @@
                 <tr *ngFor="let item of medics">
                   <td>{{item.name}}</td>
                   <!--<td>{{item.unit}}</td>-->
-                  <td>{{item.cost}} VNĐ</td>
+                  <td>{{item.cost | currency:'VND'}}</td>
                   <td>
                     <input type="checkbox" (change)="ClickItemAction($event, 'medicIds', item.id)">
                   </td>
@@ -196,7 +196,7 @@
       <div class="col-sm-12">
         <div class="form-group">
           <b class="form-label">Giá tiền tạm tính (VNĐ)</b>
-          <input class="form-control" name="cost" type="number" disabled [(ngModel)]="currentBooking.cost">
+          <input class="form-control" name="cost" type="number" disabled [ngModel]="currentBooking.cost | currency:'VND'">
         </div>
       </div>
     </div>

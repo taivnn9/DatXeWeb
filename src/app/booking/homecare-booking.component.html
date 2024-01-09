@@ -88,7 +88,7 @@
                       <input class="col-12 form-control" type="text" name="selectedEquipmentsDailyNote{{i}}" [(ngModel)]="selectedEquipmentsDaily[i].note" placeholder="Ghi chú">
                       <div class="col-12 row ">
                         <div class="col-9">
-                          <p>{{item.cost}} VNĐ/{{item.unit}}</p>
+                          <p>{{item.cost | currency:'VND'}}/{{item.unit}}</p>
                         </div>
 
 
@@ -147,7 +147,7 @@
                       <input class="col-12 form-control" type="text" name="selectedEquipmentsNote{{i}}" [(ngModel)]="selectedEquipments[i].note" placeholder="Ghi chú">
                       <div class="col-12 row ">
                         <div class="col-9">
-                          <p>{{item.cost}} VNĐ/{{item.unit}}</p>
+                          <p>{{item.cost | currency:'VND'}}/{{item.unit}}</p>
                         </div>
 
 
@@ -198,7 +198,7 @@
                     <input class="col-12 form-control" type="text" name="selectedMedicsNote{{i}}" [(ngModel)]="selectedMedics[i].note" placeholder="Ghi chú">
                     <div class="col-12 row ">
                       <div class="col-9">
-                        <p>{{item.cost}} VNĐ/{{item.unit}}</p>
+                        <p>{{item.cost | currency:'VND'}}/{{item.unit}}</p>
                       </div>
 
 
